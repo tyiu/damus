@@ -1,0 +1,18 @@
+git:
+  filters:
+  - filter_type: dir
+    file_format: STRINGS
+    source_file_extensions: strings
+    source_language: en
+    source_file_dir: damus Localizations/en.xcloc/Source Contents/damus/en.lproj
+    translation_files_expression: damus/<lang>.lproj
+
+  - filter_type: dir
+    file_format: STRINGSDICT
+    source_file_extensions: stringsdict
+    source_language: en
+    source_file_dir: damus Localizations/en.xcloc/Source Contents/damus/en.lproj
+    translation_files_expression: damus/<lang>.lproj
+
+  settings:
+    pr_branch_name: tx_translations_<br_unique_id>
