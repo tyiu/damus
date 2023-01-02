@@ -160,9 +160,9 @@ struct EditMetadataView: View {
                     Text("NIP-05 Verification")
                 }, footer: {
                     if let parts = nip05_parts {
-                        Text(String.localizedStringWithFormat("'%@' at '%@' will be used for verification", parts.username, parts.host))
+                        Text(String(format: NSLocalizedString("'%@' at '%@' will be used for verification", comment: "Description of how the nip05 identifier would be used for verification."), parts.username, parts.host))
                     } else {
-                        Text(String.localizedStringWithFormat("'%@' is an invalid nip05 identifier. It should look like an email.", nip05))
+                            Text(String(format: NSLocalizedString("'%@' is an invalid nip05 identifier. It should look like an email.", comment: "Description of why the nip05 identifier is invalid."), nip05))
                     }
                 })
 
