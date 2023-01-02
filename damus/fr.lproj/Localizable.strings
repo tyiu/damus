@@ -1,0 +1,102 @@
+﻿/* Label to prompt for about text entry for user to describe about themself. */
+"About" = "À propos";
+
+/* Placeholder text for About Me description. */
+"Absolute Boss" = "Patron absolu";
+
+/* Label to indicate the public ID of the account. */
+"Account ID" = "identifiant de compte";
+
+/* Dropdown option label for Lightning wallet, Bitcoin Beach. */
+"Bitcoin Beach" = "Plage Bitcoin";
+
+/* Dropdown option label for Lightning wallet, Blixt Wallet */
+"Blixt Wallet" = "Portefeuille Blixt";
+
+/* Dropdown option label for Lightning wallet, Blue Wallet. */
+"Blue Wallet" = "Portefeuille bleu";
+
+/* Dropdown option label for Lightning wallet, Breez. */
+"Breez" = "Brise";
+
+/* Dropdown option label for Lightning wallet, Cash App. */
+"Cash App" = "Application de trésorerie";
+
+/* Button to create account. */
+"Create" = "Créer";
+
+/* Button to create an account. */
+"Create Account" = "Créer un compte";
+
+/* Example description about Bitcoin creator(s), Satoshi Nakamoto. */
+"Creator(s) of Bitcoin. Absolute legend." = "Créateur(s) de Bitcoin. Légende absolue.";
+
+/* Label to prompt display name entry. */
+"Display Name" = "Afficher un nom";
+
+/* Button to follow a user. */
+"Follow" = "Suivre";
+
+/* Label to indicate that the user is in the process of following another user. */
+"Following..." = "Suivant...";
+
+/* Button to complete account creation and start using the app. */
+"Let's go!" = "Allons-y!";
+
+/* Dropdown option label for Lightning wallet, LNLink. */
+"LNLink" = "LNLink";
+
+/* Dropdown option label for system default for Lightning wallet. */
+"Local default" = "Valeur locale par défaut";
+
+/* Dropdown option label for Lightning wallet, Muun. */
+"Muun" = "Muun";
+
+/* String indicating that a given timestamp just occurred */
+"now" = "maintenant";
+
+/* Dropdown option label for Lightning wallet, Phoenix. */
+"Phoenix" = "Phénix";
+
+/* Label to indicate that the user is replying to themself. */
+"Reply to self" = "Répondre à soi-même";
+
+/* Label to indicate that the user is replying to 1 user and others. */
+"replying_to_one_and_others" = "répondre_à_l'un_et_aux_autres";
+
+/* Label to indicate that the user is replying to 2 users and others. */
+"replying_to_two_and_others" = "répondre_à_deux_et_autres";
+
+/* Dropdown option label for Lightning wallet, River */
+"River" = "Rivière";
+
+/* Example username of Bitcoin creator(s), Satoshi Nakamoto. */
+"satoshi" = "satoshi";
+
+/* Name of Bitcoin creator(s). */
+"Satoshi Nakamoto" = "Satoshi Nakamoto";
+
+/* Dropdown option label for Lightning wallet, Strike. */
+"Strike" = "Frapper";
+
+/* Text box prompt to ask user to type their post. */
+"Type your post here..." = "Tapez votre message ici...";
+
+/* Button to unfollow a user. */
+"Unfollow" = "Ne plus suivre";
+
+/* Label to indicate that the user is in the process of unfollowing another user. */
+"Unfollowing..." = "Désabonnement...";
+
+/* Label to prompt username entry. */
+"Username" = "Nom d'utilisateur";
+
+/* Dropdown option label for Lightning wallet, Wallet Of Satoshi. */
+"Wallet Of Satoshi" = "Portefeuille de Satoshi";
+
+/* Dropdown option label for Lightning wallet, Zebedee. */
+"Zebedee" = "Zébédée";
+
+/* Dropdown option label for Lightning wallet, Zeus LN. */
+"Zeus LN" = "Zeus L.N.";
+
