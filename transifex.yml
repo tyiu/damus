@@ -1,0 +1,22 @@
+git:
+  filters:
+  - filter_type: file
+    file_format: STRINGS
+    source_language: en
+    source_file: damus Localizations/en.xcloc/Source Contents/damus/en.lproj/InfoPlist.strings
+    translation_files_expression: damus/<lang>.lproj/InfoPlist.strings
+
+  - filter_type: file
+    file_format: STRINGS
+    source_language: en
+    source_file: damus Localizations/en.xcloc/Source Contents/damus/en.lproj/Localizable.strings
+    translation_files_expression: damus/<lang>.lproj/Localizable.strings
+
+  - filter_type: file
+    file_format: STRINGSDICT
+    source_language: en
+    source_file: damus Localizations/en.xcloc/Source Contents/damus/en.lproj/Localizable.stringsdict
+    translation_files_expression: damus/<lang>.lproj/Localizable.stringsdict
+
+  settings:
+    pr_branch_name: tx_translations_<br_unique_id>
