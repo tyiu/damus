@@ -1,0 +1,978 @@
+<?xml version="1.0" ?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="damus/en.lproj/InfoPlist.strings" source-language="en" target-language="fr" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="14.2" build-num="14C18"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+        <source>Damus</source>
+        <target>Damus</target>
+        
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>damus</source>
+        <target>Damus</target>
+        
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryAddUsageDescription" xml:space="preserve">
+        <source>&quot;Granting Damus access to your photo library allows you to save photos.</source>
+        <target>« Accorder à Damus l'accès à votre photothèque vous permet d'enregistrer des photos.</target>
+        
+        <note>Privacy - Photo Library Additions Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="damus/en.lproj/Localizable.strings" source-language="en" target-language="fr" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="14.2" build-num="14C18"/>
+    </header>
+    <body>
+      <trans-unit id="   " xml:space="preserve">
+        <source>   </source>
+        <target>97740cdeabb36024ca5c6d42d6edcc88_tr</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@" xml:space="preserve">
+        <source>%@</source>
+        <target>%@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@ following" xml:space="preserve">
+        <source>%@ following</source>
+        <target>%@ Suivant</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@'s Followers" xml:space="preserve">
+        <source>%@'s Followers</source>
+        <target>Abonnés de %@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@. Creating an account doesn't require a phone number, email or name. Get started right away with zero friction." xml:space="preserve">
+        <source>%@. Creating an account doesn't require a phone number, email or name. Get started right away with zero friction.</source>
+        <target>%@. La création d'un compte ne nécessite pas de numéro de téléphone, d'e-mail ou de nom. Commencez tout de suite sans aucune friction.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@. End-to-End encrypted private messaging. Keep Big Tech out of your DMs" xml:space="preserve">
+        <source>%@. End-to-End encrypted private messaging. Keep Big Tech out of your DMs</source>
+        <target>%@. Messagerie privée cryptée de bout en bout. Gardez Big Tech hors de vos DM</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@. Tip your friend's posts and stack sats with Bitcoin⚡️, the native currency of the internet." xml:space="preserve">
+        <source>%@. Tip your friend's posts and stack sats with Bitcoin⚡️, the native currency of the internet.</source>
+        <target>%@. Donnez un pourboire aux messages de vos amis et empilez les sats avec Bitcoin⚡️, la monnaie native d'Internet.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%lld" xml:space="preserve">
+        <source>%lld</source>
+        <target>%lld</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%lld/%lld" xml:space="preserve">
+        <source>%lld/%lld</source>
+        <target>%lld/%lld</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="&amp;nbsp;" xml:space="preserve">
+        <source>&amp;nbsp;</source>
+        <target>&amp;nbsp;</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="&lt; e &gt;" xml:space="preserve">
+        <source>&lt; e &gt;</source>
+        <target> &lt; e &gt;</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="@" xml:space="preserve">
+        <source>@</source>
+        <target>@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="About" xml:space="preserve">
+        <source>About</source>
+        <target>À propos</target>
+        
+        <note>Label to prompt for about text entry for user to describe about themself.</note>
+      </trans-unit>
+      <trans-unit id="About Me" xml:space="preserve">
+        <source>About Me</source>
+        <target>Sur moi</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Absolute Boss" xml:space="preserve">
+        <source>Absolute Boss</source>
+        <target>Patron absolu</target>
+        
+        <note>Placeholder text for About Me description.</note>
+      </trans-unit>
+      <trans-unit id="Account ID" xml:space="preserve">
+        <source>Account ID</source>
+        <target>identifiant de compte</target>
+        
+        <note>Label to indicate the public ID of the account.</note>
+      </trans-unit>
+      <trans-unit id="Add" xml:space="preserve">
+        <source>Add</source>
+        <target>Ajouter</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add Relay" xml:space="preserve">
+        <source>Add Relay</source>
+        <target>Ajouter un relais</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to boost this post?" xml:space="preserve">
+        <source>Are you sure you want to boost this post?</source>
+        <target>Êtes-vous sûr de vouloir booster ce post ?</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Before we get started, you'll need to save your account info, otherwise you won't be able to login in the future if you ever uninstall Damus." xml:space="preserve">
+        <source>Before we get started, you'll need to save your account info, otherwise you won't be able to login in the future if you ever uninstall Damus.</source>
+        <target>Avant de commencer, vous devrez enregistrer les informations de votre compte, sinon vous ne pourrez plus vous connecter à l'avenir si vous désinstallez Damus.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bitcoin Beach" xml:space="preserve">
+        <source>Bitcoin Beach</source>
+        <target>Plage Bitcoin</target>
+        
+        <note>Dropdown option label for Lightning wallet, Bitcoin Beach.</note>
+      </trans-unit>
+      <trans-unit id="Bitcoin Lightning Tips" xml:space="preserve">
+        <source>Bitcoin Lightning Tips</source>
+        <target>Conseils de foudre Bitcoin</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Blixt Wallet" xml:space="preserve">
+        <source>Blixt Wallet</source>
+        <target>Portefeuille Blixt</target>
+        
+        <note>Dropdown option label for Lightning wallet, Blixt Wallet</note>
+      </trans-unit>
+      <trans-unit id="Blue Wallet" xml:space="preserve">
+        <source>Blue Wallet</source>
+        <target>Portefeuille bleu</target>
+        
+        <note>Dropdown option label for Lightning wallet, Blue Wallet.</note>
+      </trans-unit>
+      <trans-unit id="Boost" xml:space="preserve">
+        <source>Boost</source>
+        <target>Augmenter</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Boosted" xml:space="preserve">
+        <source>Boosted</source>
+        <target>Boosté</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Breez" xml:space="preserve">
+        <source>Breez</source>
+        <target>Brise</target>
+        
+        <note>Dropdown option label for Lightning wallet, Breez.</note>
+      </trans-unit>
+      <trans-unit id="Broadcast" xml:space="preserve">
+        <source>Broadcast</source>
+        <target>Diffuser</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Annuler</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cash App" xml:space="preserve">
+        <source>Cash App</source>
+        <target>Application de trésorerie</target>
+        
+        <note>Dropdown option label for Lightning wallet, Cash App.</note>
+      </trans-unit>
+      <trans-unit id="Clear" xml:space="preserve">
+        <source>Clear</source>
+        <target>Dégager</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Clear Cache" xml:space="preserve">
+        <source>Clear Cache</source>
+        <target>Vider le cache</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copied" xml:space="preserve">
+        <source>Copied</source>
+        <target>Copié</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy" xml:space="preserve">
+        <source>Copy</source>
+        <target>Copie</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Account ID" xml:space="preserve">
+        <source>Copy Account ID</source>
+        <target>Copier l'identifiant du compte</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Image" xml:space="preserve">
+        <source>Copy Image</source>
+        <target>Copier l'image</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Image URL" xml:space="preserve">
+        <source>Copy Image URL</source>
+        <target>Copier l'URL de l'image</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy LNUrl" xml:space="preserve">
+        <source>Copy LNUrl</source>
+        <target>Copier LNUrl</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Note ID" xml:space="preserve">
+        <source>Copy Note ID</source>
+        <target>Copier l'ID de la note</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Note JSON" xml:space="preserve">
+        <source>Copy Note JSON</source>
+        <target>Copier la note JSON</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy Text" xml:space="preserve">
+        <source>Copy Text</source>
+        <target>Copier le texte</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy User ID" xml:space="preserve">
+        <source>Copy User ID</source>
+        <target>Copier l'ID utilisateur</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copy invoice" xml:space="preserve">
+        <source>Copy invoice</source>
+        <target>Copier la facture</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Create" xml:space="preserve">
+        <source>Create</source>
+        <target>Créer</target>
+        
+        <note>Button to create account.</note>
+      </trans-unit>
+      <trans-unit id="Create Account" xml:space="preserve">
+        <source>Create Account</source>
+        <target>Créer un compte</target>
+        
+        <note>Button to create an account.</note>
+      </trans-unit>
+      <trans-unit id="Creator(s) of Bitcoin. Absolute legend." xml:space="preserve">
+        <source>Creator(s) of Bitcoin. Absolute legend.</source>
+        <target>Créateur(s) de Bitcoin. Légende absolue.</target>
+        
+        <note>Example description about Bitcoin creator(s), Satoshi Nakamoto.</note>
+      </trans-unit>
+      <trans-unit id="DM" xml:space="preserve">
+        <source>DM</source>
+        <target>DM</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Damus" xml:space="preserve">
+        <source>Damus</source>
+        <target>Damus</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Default Wallet" xml:space="preserve">
+        <source>Default Wallet</source>
+        <target>Portefeuille par défaut</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete" xml:space="preserve">
+        <source>Delete</source>
+        <target>Effacer</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Dismiss" xml:space="preserve">
+        <source>Dismiss</source>
+        <target>Rejeter</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Display Name" xml:space="preserve">
+        <source>Display Name</source>
+        <target>Afficher un nom</target>
+        
+        <note>Label to prompt display name entry.</note>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <target>Fait</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Earn Money" xml:space="preserve">
+        <source>Earn Money</source>
+        <target>Gagner de l'argent</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit" xml:space="preserve">
+        <source>Edit</source>
+        <target>Éditer</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit Profile" xml:space="preserve">
+        <source>Edit Profile</source>
+        <target>Editer le profil</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Encrypted" xml:space="preserve">
+        <source>Encrypted</source>
+        <target>Crypté</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Encrypted DMs" xml:space="preserve">
+        <source>Encrypted DMs</source>
+        <target>DM cryptés</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Enter your account key to login:" xml:space="preserve">
+        <source>Enter your account key to login:</source>
+        <target>Entrez votre clé de compte pour vous connecter :</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error: %@" xml:space="preserve">
+        <source>Error: %@</source>
+        <target>Erreur: %@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Filter State" xml:space="preserve">
+        <source>Filter State</source>
+        <target>État du filtre</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Follow" xml:space="preserve">
+        <source>Follow</source>
+        <target>Suivre</target>
+        
+        <note>Button to follow a user.</note>
+      </trans-unit>
+      <trans-unit id="Followers" xml:space="preserve">
+        <source>Followers</source>
+        <target>Suiveurs</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Following" xml:space="preserve">
+        <source>Following</source>
+        <target>Suivant</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Following..." xml:space="preserve">
+        <source>Following...</source>
+        <target>Suivant...</target>
+        
+        <note>Label to indicate that the user is in the process of following another user.</note>
+      </trans-unit>
+      <trans-unit id="Follows" xml:space="preserve">
+        <source>Follows</source>
+        <target>Suit</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Global" xml:space="preserve">
+        <source>Global</source>
+        <target>Global</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Goto post %@" xml:space="preserve">
+        <source>Goto post %@</source>
+        <target>Aller au message %@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Goto profile %@" xml:space="preserve">
+        <source>Goto profile %@</source>
+        <target>Aller au profil %@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home" xml:space="preserve">
+        <source>Home</source>
+        <target>Domicile</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="LNLink" xml:space="preserve">
+        <source>LNLink</source>
+        <target>LNLink</target>
+        
+        <note>Dropdown option label for Lightning wallet, LNLink.</note>
+      </trans-unit>
+      <trans-unit id="Let's go!" xml:space="preserve">
+        <source>Let's go!</source>
+        <target>Allons-y!</target>
+        
+        <note>Button to complete account creation and start using the app.</note>
+      </trans-unit>
+      <trans-unit id="Lightning Address or LNURL" xml:space="preserve">
+        <source>Lightning Address or LNURL</source>
+        <target>Adresse Lightning ou LNURL</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Lightning Invoice" xml:space="preserve">
+        <source>Lightning Invoice</source>
+        <target>Facture éclair</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Local default" xml:space="preserve">
+        <source>Local default</source>
+        <target>Valeur locale par défaut</target>
+        
+        <note>Dropdown option label for system default for Lightning wallet.</note>
+      </trans-unit>
+      <trans-unit id="Login" xml:space="preserve">
+        <source>Login</source>
+        <target>Connexion</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Logout" xml:space="preserve">
+        <source>Logout</source>
+        <target>Se déconnecter</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Make sure your nsec account key is saved before you logout or you will lose access to this account" xml:space="preserve">
+        <source>Make sure your nsec account key is saved before you logout or you will lose access to this account</source>
+        <target>Assurez-vous que votre clé de compte nsec est enregistrée avant de vous déconnecter ou vous perdrez l'accès à ce compte</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Muun" xml:space="preserve">
+        <source>Muun</source>
+        <target>Muun</target>
+        
+        <note>Dropdown option label for Lightning wallet, Muun.</note>
+      </trans-unit>
+      <trans-unit id="NIP-05 Verification" xml:space="preserve">
+        <source>NIP-05 Verification</source>
+        <target>Vérification NIP-05</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Nothing to see here. Check back later!" xml:space="preserve">
+        <source>Nothing to see here. Check back later!</source>
+        <target>Rien à voir ici. Revenez plus tard!</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Notifications" xml:space="preserve">
+        <source>Notifications</source>
+        <target>Avis</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pay" xml:space="preserve">
+        <source>Pay</source>
+        <target>Payer</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pay the lightning invoice" xml:space="preserve">
+        <source>Pay the lightning invoice</source>
+        <target>Payer la facture éclair</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Phoenix" xml:space="preserve">
+        <source>Phoenix</source>
+        <target>Phénix</target>
+        
+        <note>Dropdown option label for Lightning wallet, Phoenix.</note>
+      </trans-unit>
+      <trans-unit id="Post" xml:space="preserve">
+        <source>Post</source>
+        <target>Poste</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Posts" xml:space="preserve">
+        <source>Posts</source>
+        <target>Des postes</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Posts &amp; Replies" xml:space="preserve">
+        <source>Posts &amp; Replies</source>
+        <target>Messages &amp; Réponses</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Private" xml:space="preserve">
+        <source>Private</source>
+        <target>Privé</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Private Key" xml:space="preserve">
+        <source>Private Key</source>
+        <target>Clé privée</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="PrivateKey" xml:space="preserve">
+        <source>PrivateKey</source>
+        <target>Clé privée</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Profile Picture" xml:space="preserve">
+        <source>Profile Picture</source>
+        <target>Image de profil</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Account ID" xml:space="preserve">
+        <source>Public Account ID</source>
+        <target>ID de compte public</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Key" xml:space="preserve">
+        <source>Public Key</source>
+        <target>Clé publique</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Key?" xml:space="preserve">
+        <source>Public Key?</source>
+        <target>Clé publique?</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public key" xml:space="preserve">
+        <source>Public key</source>
+        <target>Clé publique</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Recommended Relays" xml:space="preserve">
+        <source>Recommended Relays</source>
+        <target>Relais recommandés</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Relay" xml:space="preserve">
+        <source>Relay</source>
+        <target>Relais</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Relays" xml:space="preserve">
+        <source>Relays</source>
+        <target>Relais</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Reply to self" xml:space="preserve">
+        <source>Reply to self</source>
+        <target>Répondre à soi-même</target>
+        
+        <note>Label to indicate that the user is replying to themself.</note>
+      </trans-unit>
+      <trans-unit id="Replying to:" xml:space="preserve">
+        <source>Replying to:</source>
+        <target>Répondre à :</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Reset" xml:space="preserve">
+        <source>Reset</source>
+        <target>Réinitialiser</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="River" xml:space="preserve">
+        <source>River</source>
+        <target>Rivière</target>
+        
+        <note>Dropdown option label for Lightning wallet, River</note>
+      </trans-unit>
+      <trans-unit id="Satoshi Nakamoto" xml:space="preserve">
+        <source>Satoshi Nakamoto</source>
+        <target>Satoshi Nakamoto</target>
+        
+        <note>Name of Bitcoin creator(s).</note>
+      </trans-unit>
+      <trans-unit id="Save" xml:space="preserve">
+        <source>Save</source>
+        <target>Sauver</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Save Image" xml:space="preserve">
+        <source>Save Image</source>
+        <target>Enregistrer l'image</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search hashtag: #%@" xml:space="preserve">
+        <source>Search hashtag: #%@</source>
+        <target>Mot-clic de recherche : #%@</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search..." xml:space="preserve">
+        <source>Search...</source>
+        <target>Chercher...</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Secret Account Login Key" xml:space="preserve">
+        <source>Secret Account Login Key</source>
+        <target>Clé de connexion au compte secret</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Select a lightning wallet" xml:space="preserve">
+        <source>Select a lightning wallet</source>
+        <target>Sélectionnez un portefeuille éclair</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Select default wallet" xml:space="preserve">
+        <source>Select default wallet</source>
+        <target>Sélectionnez le portefeuille par défaut</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Send a message to start the conversation..." xml:space="preserve">
+        <source>Send a message to start the conversation...</source>
+        <target>Envoyez un message pour démarrer la conversation...</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Settings" xml:space="preserve">
+        <source>Settings</source>
+        <target>Réglages</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Share" xml:space="preserve">
+        <source>Share</source>
+        <target>Partager</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Show" xml:space="preserve">
+        <source>Show</source>
+        <target>Montrer</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Show wallet selector" xml:space="preserve">
+        <source>Show wallet selector</source>
+        <target>Afficher le sélecteur de portefeuille</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Strike" xml:space="preserve">
+        <source>Strike</source>
+        <target>Frapper</target>
+        
+        <note>Dropdown option label for Lightning wallet, Strike.</note>
+      </trans-unit>
+      <trans-unit id="This is a public key, you will not be able to make posts or interact in any way. This is used for viewing accounts from their perspective." xml:space="preserve">
+        <source>This is a public key, you will not be able to make posts or interact in any way. This is used for viewing accounts from their perspective.</source>
+        <target>Il s'agit d'une clé publique, vous ne pourrez pas publier de messages ou interagir de quelque manière que ce soit. Ceci est utilisé pour visualiser les comptes de leur point de vue.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is an old-style nostr key. We're not sure if it's a pubkey or private key. Please toggle the button below if this a public key." xml:space="preserve">
+        <source>This is an old-style nostr key. We're not sure if it's a pubkey or private key. Please toggle the button below if this a public key.</source>
+        <target>Il s'agit d'une clé Nostr à l'ancienne. Nous ne savons pas s'il s'agit d'une clé publique ou d'une clé privée. Veuillez basculer le bouton ci-dessous s'il s'agit d'une clé publique.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is your account ID, you can give this to your friends so that they can follow you. Click to copy." xml:space="preserve">
+        <source>This is your account ID, you can give this to your friends so that they can follow you. Click to copy.</source>
+        <target>Ceci est votre identifiant de compte, vous pouvez le donner à vos amis afin qu'ils puissent vous suivre. Cliquez pour copier.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is your secret account key. You need this to access your account. Don't share this with anyone! Save it in a password manager and keep it safe!" xml:space="preserve">
+        <source>This is your secret account key. You need this to access your account. Don't share this with anyone! Save it in a password manager and keep it safe!</source>
+        <target>Il s'agit de votre clé de compte secrète. Vous en avez besoin pour accéder à votre compte. Ne le partagez avec personne ! Enregistrez-le dans un gestionnaire de mots de passe et gardez-le en sécurité !</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Thread" xml:space="preserve">
+        <source>Thread</source>
+        <target>Fil</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Type your post here..." xml:space="preserve">
+        <source>Type your post here...</source>
+        <target>Tapez votre message ici...</target>
+        
+        <note>Text box prompt to ask user to type their post.</note>
+      </trans-unit>
+      <trans-unit id="Unfollow" xml:space="preserve">
+        <source>Unfollow</source>
+        <target>Ne plus suivre</target>
+        
+        <note>Button to unfollow a user.</note>
+      </trans-unit>
+      <trans-unit id="Unfollowing" xml:space="preserve">
+        <source>Unfollowing</source>
+        <target>Se désabonner</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unfollowing..." xml:space="preserve">
+        <source>Unfollowing...</source>
+        <target>Désabonnement...</target>
+        
+        <note>Label to indicate that the user is in the process of unfollowing another user.</note>
+      </trans-unit>
+      <trans-unit id="Unfollows" xml:space="preserve">
+        <source>Unfollows</source>
+        <target>Se désabonner</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Username" xml:space="preserve">
+        <source>Username</source>
+        <target>Nom d'utilisateur</target>
+        
+        <note>Label to prompt username entry.</note>
+      </trans-unit>
+      <trans-unit id="Wallet Of Satoshi" xml:space="preserve">
+        <source>Wallet Of Satoshi</source>
+        <target>Portefeuille de Satoshi</target>
+        
+        <note>Dropdown option label for Lightning wallet, Wallet Of Satoshi.</note>
+      </trans-unit>
+      <trans-unit id="Wallet Selector" xml:space="preserve">
+        <source>Wallet Selector</source>
+        <target>Sélecteur de portefeuille</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Website" xml:space="preserve">
+        <source>Website</source>
+        <target>Site Internet</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Welcome to the social network %@ control." xml:space="preserve">
+        <source>Welcome to the social network %@ control.</source>
+        <target>Bienvenue sur le réseau social %@ control.</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Welcome, %@!" xml:space="preserve">
+        <source>Welcome, %@!</source>
+        <target>Bienvenue, %@!</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Your Name" xml:space="preserve">
+        <source>Your Name</source>
+        <target>votre nom</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Zebedee" xml:space="preserve">
+        <source>Zebedee</source>
+        <target>Zébédée</target>
+        
+        <note>Dropdown option label for Lightning wallet, Zebedee.</note>
+      </trans-unit>
+      <trans-unit id="Zeus LN" xml:space="preserve">
+        <source>Zeus LN</source>
+        <target>Zeus L.N.</target>
+        
+        <note>Dropdown option label for Lightning wallet, Zeus LN.</note>
+      </trans-unit>
+      <trans-unit id="https://example.com/pic.jpg" xml:space="preserve">
+        <source>https://example.com/pic.jpg</source>
+        <target>https://example.com/pic.jpg</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="https://jb55.com" xml:space="preserve">
+        <source>https://jb55.com</source>
+        <target>https://jb55.com</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="jb55@jb55.com" xml:space="preserve">
+        <source>jb55@jb55.com</source>
+        <target>jb55@jb55.com</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="none" xml:space="preserve">
+        <source>none</source>
+        <target>rien</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="now" xml:space="preserve">
+        <source>now</source>
+        <target>maintenant</target>
+        
+        <note>String indicating that a given timestamp just occurred</note>
+      </trans-unit>
+      <trans-unit id="optional" xml:space="preserve">
+        <source>optional</source>
+        <target>optionnel</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="replying_to_one_and_others" translate="no" xml:space="preserve">
+        <source>replying_to_one_and_others</source>
+        <target>répondre_à_l'un_et_aux_autres</target>
+        
+        <note>Label to indicate that the user is replying to 1 user and others. (Key in .stringsdict)</note>
+      </trans-unit>
+      <trans-unit id="replying_to_two_and_others" translate="no" xml:space="preserve">
+        <source>replying_to_two_and_others</source>
+        <target>répondre_à_deux_et_autres</target>
+        
+        <note>Label to indicate that the user is replying to 2 users and others. (Key in .stringsdict)</note>
+      </trans-unit>
+      <trans-unit id="satoshi" xml:space="preserve">
+        <source>satoshi</source>
+        <target>satoshi</target>
+        
+        <note>Example username of Bitcoin creator(s), Satoshi Nakamoto.</note>
+      </trans-unit>
+      <trans-unit id="wss://some.relay.com" xml:space="preserve">
+        <source>wss://some.relay.com</source>
+        <target>wss://some.relay.com</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="you" xml:space="preserve">
+        <source>you</source>
+        <target>toi</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="··· %lld other notes ···" xml:space="preserve">
+        <source>··· %lld other notes ···</source>
+        <target>··· %lld autres notes ···</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="🤙" xml:space="preserve">
+        <source>🤙</source>
+        <target>🤙</target>
+        
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="damus/en.lproj/Localizable.stringsdict" source-language="en" target-language="fr" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="14.2" build-num="14C18"/>
+    </header>
+    <body>
+      <trans-unit id="/replying_to_one_and_others:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>Replying to %@%#@others@</source>
+        <target>Répondre à %@%#@others@</target>
+        
+        <note>Label to indicate that the user is replying to 1 user and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_one_and_others:dict/others:dict/one:dict/:string" xml:space="preserve">
+        <source> &amp; 1 other</source>
+        <target> &amp; 1 autre</target>
+        
+        <note>Label to indicate that the user is replying to 1 user and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_one_and_others:dict/others:dict/other:dict/:string" xml:space="preserve">
+        <source> &amp; %d others</source>
+        <target> &amp; %d autres</target>
+        
+        <note>Label to indicate that the user is replying to 1 user and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_one_and_others:dict/others:dict/zero:dict/:string" xml:space="preserve">
+        <source/>
+        <note>Label to indicate that the user is replying to 1 user and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_two_and_others:dict/NSStringLocalizedFormatKey:dict/:string" xml:space="preserve">
+        <source>Replying to %@, %@%#@others@</source>
+        <target>Réponse à %@, %@%#@autres@</target>
+        
+        <note>Label to indicate that the user is replying to 2 users and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_two_and_others:dict/others:dict/one:dict/:string" xml:space="preserve">
+        <source> &amp; 1 other</source>
+        <target> &amp; 1 autre</target>
+        
+        <note>Label to indicate that the user is replying to 2 users and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_two_and_others:dict/others:dict/other:dict/:string" xml:space="preserve">
+        <source> &amp; %d others</source>
+        <target> &amp; %d autres</target>
+        
+        <note>Label to indicate that the user is replying to 2 users and others.</note>
+      </trans-unit>
+      <trans-unit id="/replying_to_two_and_others:dict/others:dict/zero:dict/:string" xml:space="preserve">
+        <source/>
+        <note>Label to indicate that the user is replying to 2 users and others.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
