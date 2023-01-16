@@ -1,0 +1,27 @@
+name: Export localizations
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "*"
+jobs:
+  export_localizations:
+    name: Export localizations
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Export Localizations
+      run: xcodebuild -exportLocalizations -project damus.xcodeproj -localizationPath "damus Localizations" -exportLanguage en-US -exportLanguage es-419
+    - name: Verify Source Localization
+      run: 
+    - name: Commit Localizations
+      run: |
+        git --version
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git status
+        git add damus/*.lproj "damus Localizations"
+        git commit -m ""

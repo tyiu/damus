@@ -1,7 +1,7 @@
 
 # damus
 
-A twitter-like [nostr][nostr] client for iPhone, iPad and MacOS.
+A Twitter-like [nostr][nostr] client for iPhone, iPad, and Mac.
 
 <img src="./ss.png" width="50%" height="50%" />
 
@@ -28,39 +28,39 @@ damus implements the following [Nostr Implementation Possibilities][nips]
 1) Get the Damus app on TestFlight: https://testflight.apple.com/join/CLwjLxWl
 
 #### ⚙️ Settings (gear icon, top right)
-- Relays: You can add more relays to send your notes to by tapping the "+". 
+- Relays: You can add more relays to send your notes by tapping the "+"
   - Find more relays to add: https://nostr.info/relays/ 
 - Public Key (pubkey): Your public, personal address and how people can find and tag you
- - Secret Key: Your *private* key unique to you. Never share your private key publically and share with other clients at your own risk!
+ - Secret Key: Your *private* key, unique to you. Never share your private key publically, and share with other clients at your own risk!
    - Save your keys somewhere safe
  - Log out
 
 #### 🏠 Personal Feed (home icon, bottom navigation)
 - Feed from everyone you follow
-- Can post notes by tapping the blue + button
+- Can post notes by tapping the blue "+" button
 
 #### Notes (under 🏠 Personal Feed)
-- Sending a Note is easy and it goes to both your 🏠 Personal and 🔍 Global Feeds 
-- To tag a user you must grab their pubkey:
+- Sending a Note is easy, and it goes to both your 🏠 Personal and 🔍 Global Feeds 
+- To tag a user, you must grab their pubkey:
   1. Search their username in the search bar at the top of the 🔍 Global Feed and click their profile
-  2. Tap the 🔑 icon which will copy their pubkey to your clipboard
-  3. Go back to your 🏠 Personal Feed and tap the blue + button to compose your Note
-  4. Add @ direcly followed by the pubkey (e.g., `@npub1xtscya34g58tk0z605fvr788k263gsu6cy9x0mhnm87echrgufzsevkk5s`)
-- You can also long-press a Note to grab their User ID aka pubkey or Note ID to link directly to a Note.
-- Currently you can't delete your Notes in the iOS app
-- Share images by pasting the image url which you can grab from imgbb, imgur, etc. (i.e., `(https://i.ibb.co/2SHZbwm/alpha60.jpg)`). Currently images only load for people you follow in the 🏠 Personal Feed. Images are not automatically loaded in 🔍 Global Feed
+  2. Tap the 🔑 icon, which will copy their pubkey to your clipboard
+  3. Go back to your 🏠 Personal Feed and tap the blue "+" button to compose your Note
+  4. Add @ directly followed by the pubkey (e.g., `@npub1xtscya34g58tk0z605fvr788k263gsu6cy9x0mhnm87echrgufzsevkk5s`)
+- You can also long-press a Note to grab their User ID (pubkey) or Note ID to link directly to a Note.
+- Currently, you can't delete your Notes in the iOS app
+- Share images by pasting the image URL, which you can grab from nostr.build, imgbb, imgur, etc. (e.g., `(https://i.ibb.co/2SHZbwm/alpha60.jpg)`). Currently, images only load for people you follow in the 🏠 Personal Feed. Images are not automatically loaded in 🔍 Global Feed
 - Engaging with Notes
-  - 💬 Replying to a Note: Tap the chat icon underneath the note. This will show up in the users’ notifications and in your 🏠 Personal and 🔍 Global Feeds
-  - ♺ Reposts: Tap the repost icon which will show up in your 🏠 Personal and 🔍 Global Feeds
-  - ♡ Likes: Tap the heart icon. Users will not get a notification, and cannot see who liked their note (currently, web clients can see your pfp only)
+  - 💬 Replying to a Note: Tap the chat icon underneath the note. This icon will show up in the users' notifications and in your 🏠 Personal and 🔍 Global Feeds
+  - 🔁 Reposts: Tap the repost icon, which will show up in your 🏠 Personal and 🔍 Global Feeds
+  - 🤙 Reactions: Tap the shaka icon. Users will not get a notification, but they can see who reacted to their note
 - Formatting Notes (may not format as intended in other web clients)
   - Italics: 1 asterisk `*italic*`
-  - Bold: 2 asterisk `**bold**`
+  - Bold: 2 asterisks `**bold**`
   - Strikethrough: 1 tildes `~strikethrough~`
   - Code: 1 back-tick `` `code` ``
 
 #### 💬 Encrypted DMs (chat app, bottom navigation)
-- Tap the chat icon and you'll notice there's nothing to see at first. Go to a user profile and tap the 💬 chat icon next to the follow button to begin a DM
+- Tap the chat icon and you'll notice nothing to see at first. Go to a user profile and tap the 💬 chat icon next to the follow button to begin a DM
 
 #### 🔍 Global Feed (magnify glass, bottom navigation)
 - View the Global Feed from all the relays you've added in ⚙️ Settings. Currently you can only search hashtags and user names and pubkeys
@@ -80,20 +80,29 @@ damus implements the following [Nostr Implementation Possibilities][nips]
 	
 **Alby (browser extension)**
 - Get the [Alby](https://getalby.com/) browser extension and create your Alby address [yourname]@getalby.com or connect your existing Lightning wallet
-- Convert your Damus secret key from nsec to hex at https://damus.io/key then go to Settings in Alby and under the Nostr section at the bottom of the page add your private hex key. You can also generate new address in the extension
-- Click the Alby extension > click Receive > enter the amount of Sats > click Get Invoice > click Copy > then paste into Damus
+- Convert your Damus secret key from nsec to hex at https://damus.io/key then go to "Settings" in Alby and under the "Nostr" section at the bottom of the page add your private hex key. You can also generate new address in the extension
+- Click the Alby extension > click "Receive" > enter the amount of Sats > click "Get Invoice" > click "Copy" > then paste into Damus
 - Note: On Damus Web it will appear as a string of characters but on Damus iOS it will appear as a clickable image
 
 **Zeus (mobile app)**
 - Download [Zeus](https://zeusln.app/) app (iOS, Google, APK)
-- Tap Get Started button > tap Connect a node > click on + sign (top right) > select Indhub > press Scan Lndhub QR > (from the Alby browser extension… click your account on the top left > click Manage Accounts > click 3-dot menu to right of your account and click Export Account to get a QR code then go back to Zeus app) > scan the QR Code and tap Save Node Config button
-- To create an invoice tap Lightning > tap Receive > type in amount > tap Create Invoice > tap Copy Invoice > paste into a new Damus note
+- Tap "Get Started" button > tap "Connect a node" > click on "+" sign (top right) > select "Indhub" > press "Scan Lndhub QR" > (from the Alby browser extension… click your account on the top left > click "Manage Accounts" > click 3-dot menu to the right of your account and click "Export Account" to get a QR code then go back to Zeus app) > scan the QR Code and tap "Save Node Config" button
+- To create an invoice, tap "Lightning" > tap "Receive" > type in amount > tap "Create Invoice" > tap "Copy Invoice" > paste into a new Damus note
 
 ## Contributing
 
-Contributors welcome! [Email patches][git-send-email] to jb55@jb55.com are preferred, but I accept PRs on github as well.
+### Code
+
+Contributors welcome! [Email patches][git-send-email] to jb55@jb55.com are preferred, but I accept PRs on GitHub as well.
 
 [git-send-email]: http://git-send-email.io
+
+### Translations
+
+Translators welcome! Join the [Transifex][transifex] project. If you do not see your language, add it to the [Xcode project][xcode-add-language] and [export_localizations.yaml](.github/workflows/export_localizations.yaml), or reach out to .
+
+[transifex]: https://explore.transifex.com/damus/damus-ios/
+[xcode-add-language]: https://developer.apple.com/documentation/xcode/adding-support-for-languages-and-regions
 
 ## git log bot
 
@@ -105,5 +114,5 @@ There may be nostr badges awarded for contributors in the future... :)
 
 First contributors:
 
-1. @randymcmillan
-2. @jcarucci27
+1. [@randymcmillan](https://github.com/randymcmillan)
+2. [@jcarucci27](https://github.com/jcarucci27)

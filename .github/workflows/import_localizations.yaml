@@ -1,0 +1,26 @@
+name: Import localizations on Transifex pull requests
+on:
+  push:
+    branches:
+      - 'transifex/**'
+    paths:
+      - 'damus Localizations/*.xcloc/Localized Contents/*.xliff'
+      - '!damus Localizations/en-US.xcloc/Localized Contents/en-US.xliff'
+jobs:
+  import_localizations:
+    name: Import localizations on Transifex pull requests
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Import localizations
+      run: find "damus Localizations" -name "*.xliff" | grep -v "en-US.xliff" | xargs -I % xcodebuild -importLocalizations -project damus.xcodeproj -localizationPath %
+    - name: Commit imported localizations
+      uses: EndBug/add-and-commit@v9
+      with:
+        default_author: github_actions
+        add: '"**.strings" "**.stringsdict"'
+        message: 'Import localizations'
