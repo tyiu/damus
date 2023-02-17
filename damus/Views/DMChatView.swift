@@ -12,24 +12,47 @@ struct DMChatView: View {
     let pubkey: String
     @EnvironmentObject var dms: DirectMessageModel
     @State var showPrivateKeyWarning: Bool = false
+    @State var eventsInView = Set<NostrEvent>()
+    @State var minDate: String = ""
 
     var Messages: some View {
-        ScrollViewReader { scroller in
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(Array(zip(dms.events, dms.events.indices)), id: \.0.id) { (ev, ind) in
-                        DMView(event: dms.events[ind], damus_state: damus_state)
-                            .event_context_menu(ev, keypair: damus_state.keypair, target_pubkey: ev.pubkey)
+        VStack {
+            Text(minDate)
+                .contentShape(RoundedRectangle(cornerRadius: 4.0))
+                .foregroundColor(.primary)
+                .padding(16)
+
+            ScrollViewReader { scroller in
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(Array(zip(dms.events, dms.events.indices)), id: \.0.id) { (ev, ind) in
+                            let date = Date.init(timeIntervalSince1970: Double(ev.created_at))
+                            DMView(event: ev, damus_state: damus_state)
+                                .event_context_menu(ev, keypair: damus_state.keypair, target_pubkey: ev.pubkey)
+                                .onAppear {
+                                    eventsInView.insert(ev)
+                                }
+                                .onDisappear {
+                                    eventsInView.remove(ev)
+                                }
+                        }
+                        EndBlock(height: 80)
                     }
-                    EndBlock(height: 80)
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
-            }
-            .onAppear {
-                scroller.scrollTo("endblock")
-            }.onChange(of: dms.events.count) { _ in
-                withAnimation {
+                .onAppear {
                     scroller.scrollTo("endblock")
+                }.onChange(of: dms.events.count) { _ in
+                    withAnimation {
+                        scroller.scrollTo("endblock")
+                    }
+                }.onChange(of: eventsInView) { _ in
+                    print("eventsInView \(eventsInView.count)")
+                    let timestamps = eventsInView.map { $0.created_at }
+                    guard let minTimestamp = timestamps.min() else {
+                        return
+                    }
+                    minDate = Date.init(timeIntervalSince1970: Double(minTimestamp)).formatted(date: .abbreviated, time: .omitted)
                 }
             }
         }

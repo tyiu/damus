@@ -23,12 +23,20 @@ struct DMView: View {
 
             let should_show_img = should_show_images(contacts: damus_state.contacts, ev: event, our_pubkey: damus_state.pubkey)
 
-            NoteContentView(damus_state: damus_state, event: event, show_images: should_show_img, size: .normal, artifacts: .just_content(event.get_content(damus_state.keypair.privkey)))
-                .foregroundColor(is_ours ? Color.white : Color.primary)
-                .padding(10)
-                .background(is_ours ? Color.accentColor : Color.secondary.opacity(0.15))
-                .cornerRadius(8.0)
-                .tint(is_ours ? Color.white : Color.accentColor)
+            VStack {
+                NoteContentView(damus_state: damus_state, event: event, show_images: should_show_img, size: .normal, artifacts: .just_content(event.get_content(damus_state.keypair.privkey)))
+                    .foregroundColor(is_ours ? Color.white : Color.primary)
+                    .padding(10)
+                    .background(is_ours ? Color.accentColor : Color.secondary.opacity(0.15))
+                    .cornerRadius(8.0)
+                    .tint(is_ours ? Color.white : Color.accentColor)
+
+                Text(verbatim: Date.init(timeIntervalSince1970: Double(event.created_at)).formatted(date: .abbreviated, time: .shortened))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: is_ours ? .trailing : .leading)
+            }
+
             if !is_ours {
                 Spacer(minLength: UIScreen.main.bounds.width * 0.2)
             }
