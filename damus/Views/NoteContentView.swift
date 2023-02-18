@@ -27,6 +27,7 @@ struct NoteContentView: View {
     let event: NostrEvent
     let show_images: Bool
     let size: EventViewKind
+    let show_time: Bool
 
     @State var artifacts: NoteArtifacts
     @State var preview: LinkViewRepresentable? = nil
@@ -66,6 +67,14 @@ struct NoteContentView: View {
                             .frame(height: 50)
                     }
                 }
+            }
+
+            if show_time {
+                Text(verbatim: Date.init(timeIntervalSince1970: Double(event.created_at)).formatted(date: .omitted, time: .shortened))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .frame(alignment: .trailing)
+                    .padding([.top], 2)
             }
         }
     }
@@ -129,37 +138,54 @@ struct NoteContentView: View {
     }
 }
 
-func hashtag_str(_ htag: String) -> AttributedString {
-     var attributedString = AttributedString(stringLiteral: "#\(htag)")
-     attributedString.link = URL(string: "nostr:t:\(htag)")
-     attributedString.foregroundColor = .purple
-     return attributedString
- }
+func hashtag_str(_ htag: String, ev: NostrEvent) -> AttributedString {
+    var attributedString = AttributedString(stringLiteral: "#\(htag)")
+    attributedString.link = URL(string: "nostr:t:\(htag)")
 
-func url_str(_ url: URL) -> AttributedString {
-    var attributedString = AttributedString(stringLiteral: url.absoluteString)
-    attributedString.link = url
-    attributedString.foregroundColor = .purple
+    if ev.known_kind == .dm {
+        attributedString.underlineStyle = .single
+    } else {
+        attributedString.foregroundColor = .purple
+    }
+
     return attributedString
  }
 
-func mention_str(_ m: Mention, profiles: Profiles) -> AttributedString {
+func url_str(_ url: URL, ev: NostrEvent) -> AttributedString {
+    var attributedString = AttributedString(stringLiteral: url.absoluteString)
+    attributedString.link = url
+
+    if ev.known_kind == .dm {
+        attributedString.underlineStyle = .single
+    } else {
+        attributedString.foregroundColor = .purple
+    }
+
+    return attributedString
+ }
+
+func mention_str(_ m: Mention, profiles: Profiles, ev: NostrEvent) -> AttributedString {
+    var attributedString: AttributedString
     switch m.type {
     case .pubkey:
         let pk = m.ref.ref_id
         let profile = profiles.lookup(id: pk)
         let disp = Profile.displayName(profile: profile, pubkey: pk)
-        var attributedString = AttributedString(stringLiteral: "@\(disp)")
+        attributedString = AttributedString(stringLiteral: "@\(disp)")
         attributedString.link = URL(string: "nostr:\(encode_pubkey_uri(m.ref))")
-        attributedString.foregroundColor = .purple
-        return attributedString
     case .event:
         let bevid = bech32_note_id(m.ref.ref_id) ?? m.ref.ref_id
-        var attributedString = AttributedString(stringLiteral: "@\(abbrev_pubkey(bevid))")
+        attributedString = AttributedString(stringLiteral: "@\(abbrev_pubkey(bevid))")
         attributedString.link = URL(string: "nostr:\(encode_event_id_uri(m.ref))")
-        attributedString.foregroundColor = .purple
-        return attributedString
     }
+
+    if ev.known_kind == .dm {
+        attributedString.underlineStyle = .single
+    } else {
+        attributedString.foregroundColor = .purple
+    }
+
+    return attributedString
 }
 
 struct NoteContentView_Previews: PreviewProvider {
@@ -167,10 +193,9 @@ struct NoteContentView_Previews: PreviewProvider {
         let state = test_damus_state()
         let content = "hi there ¯\\_(ツ)_/¯ https://jb55.com/s/Oct12-150217.png 5739a762ef6124dd.jpg"
         let artifacts = NoteArtifacts(content: AttributedString(stringLiteral: content), images: [], invoices: [], links: [])
-        NoteContentView(damus_state: state, event: NostrEvent(content: content, pubkey: "pk"), show_images: true, size: .normal, artifacts: artifacts)
+        NoteContentView(damus_state: state, event: NostrEvent(content: content, pubkey: "pk"), show_images: true, size: .normal, show_time: false, artifacts: artifacts)
     }
 }
-
 
 extension View {
     func translate_button_style() -> some View {
@@ -194,21 +219,21 @@ struct NoteArtifacts {
 
 func render_note_content(ev: NostrEvent, profiles: Profiles, privkey: String?) -> NoteArtifacts {
     let blocks = ev.blocks(privkey)
-    return render_blocks(blocks: blocks, profiles: profiles, privkey: privkey)
+    return render_blocks(blocks: blocks, profiles: profiles, privkey: privkey, ev: ev)
 }
 
-func render_blocks(blocks: [Block], profiles: Profiles, privkey: String?) -> NoteArtifacts {
+func render_blocks(blocks: [Block], profiles: Profiles, privkey: String?, ev: NostrEvent) -> NoteArtifacts {
     var invoices: [Invoice] = []
     var img_urls: [URL] = []
     var link_urls: [URL] = []
     let txt: AttributedString = blocks.reduce("") { str, block in
         switch block {
         case .mention(let m):
-            return str + mention_str(m, profiles: profiles)
+            return str + mention_str(m, profiles: profiles, ev: ev)
         case .text(let txt):
             return str + AttributedString(stringLiteral: txt)
         case .hashtag(let htag):
-            return str + hashtag_str(htag)
+            return str + hashtag_str(htag, ev: ev)
         case .invoice(let invoice):
             invoices.append(invoice)
             return str
@@ -220,7 +245,7 @@ func render_blocks(blocks: [Block], profiles: Profiles, privkey: String?) -> Not
                 return str
             } else {
                 link_urls.append(url)
-                return str + url_str(url)
+                return str + url_str(url, ev: ev)
             }
         }
     }

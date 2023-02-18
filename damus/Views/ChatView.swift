@@ -113,6 +113,7 @@ struct ChatView: View {
                                     event: event,
                                     show_images: show_images,
                                     size: .normal,
+                                    show_time: false,
                                     artifacts: .just_content(event.content))
 
                     if is_active || next_ev == nil || next_ev!.pubkey != event.pubkey {

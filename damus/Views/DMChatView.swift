@@ -15,45 +15,56 @@ struct DMChatView: View {
     @State var eventsInView = Set<NostrEvent>()
     @State var minDate: String = ""
 
-    var Messages: some View {
-        VStack {
-            Text(minDate)
-                .contentShape(RoundedRectangle(cornerRadius: 4.0))
-                .foregroundColor(.primary)
-                .padding(16)
+    func fillColor() -> Color {
+        colorScheme == .light ? Color("DamusLightGrey") : Color("DamusDarkGrey")
+    }
 
-            ScrollViewReader { scroller in
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        ForEach(Array(zip(dms.events, dms.events.indices)), id: \.0.id) { (ev, ind) in
-                            let date = Date.init(timeIntervalSince1970: Double(ev.created_at))
-                            DMView(event: ev, damus_state: damus_state)
-                                .event_context_menu(ev, keypair: damus_state.keypair, target_pubkey: ev.pubkey)
-                                .onAppear {
-                                    eventsInView.insert(ev)
+    func foregroundColor() -> Color {
+        colorScheme == .light ? Color("DamusBlack") : Color("DamusWhite")
+    }
+
+    var Messages: some View {
+        ScrollViewReader { scroller in
+            ScrollView {
+                LazyVStack() {
+                    var dates = Set<Date>()
+                    ForEach(Array(zip(dms.events, dms.events.indices)), id: \.0.id) { (ev, ind) in
+                        if let date = Calendar.current.startOfDay(for: Date.init(timeIntervalSince1970: Double(ev.created_at))), dates.insert(date).inserted {
+                            Text(date.formatted(date: .abbreviated, time: .omitted))
+                                .padding([.leading, .trailing], 6.0)
+                                .padding([.top, .bottom], 2.0)
+                                .foregroundColor(.gray)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 5.0)
+                                        .foregroundColor(fillColor())
                                 }
-                                .onDisappear {
-                                    eventsInView.remove(ev)
-                                }
+                                .font(.callout)
                         }
-                        EndBlock(height: 80)
+                        DMView(event: ev, damus_state: damus_state)
+                            .event_context_menu(ev, keypair: damus_state.keypair, target_pubkey: ev.pubkey)
+                            .onAppear {
+                                eventsInView.insert(ev)
+                            }
+                            .onDisappear {
+                                eventsInView.remove(ev)
+                            }
                     }
-                    .padding(.horizontal)
+                    EndBlock(height: 80)
                 }
-                .onAppear {
+                .padding(.horizontal)
+            }
+            .onAppear {
+                scroller.scrollTo("endblock")
+            }.onChange(of: dms.events.count) { _ in
+                withAnimation {
                     scroller.scrollTo("endblock")
-                }.onChange(of: dms.events.count) { _ in
-                    withAnimation {
-                        scroller.scrollTo("endblock")
-                    }
-                }.onChange(of: eventsInView) { _ in
-                    print("eventsInView \(eventsInView.count)")
-                    let timestamps = eventsInView.map { $0.created_at }
-                    guard let minTimestamp = timestamps.min() else {
-                        return
-                    }
-                    minDate = Date.init(timeIntervalSince1970: Double(minTimestamp)).formatted(date: .abbreviated, time: .omitted)
                 }
+            }.onChange(of: eventsInView) { _ in
+                let timestamps = eventsInView.map { $0.created_at }
+                guard let minTimestamp = timestamps.min() else {
+                    return
+                }
+                minDate = Date.init(timeIntervalSince1970: Double(minTimestamp)).formatted(date: .abbreviated, time: .omitted)
             }
         }
     }
@@ -165,6 +176,16 @@ struct DMChatView: View {
                 .dismissKeyboardOnTap()
 
             VStack {
+                Text(minDate)
+                    .padding([.leading, .trailing], 6.0)
+                    .padding([.top, .bottom], 2.0)
+                    .foregroundColor(.gray)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .foregroundColor(fillColor())
+                    }
+                    .font(.callout)
+
                 Spacer()
 
                 Footer
