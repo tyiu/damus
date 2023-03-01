@@ -1,0 +1,49 @@
+name: Export Source Translations
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  export-source-translations:
+    name: Update translations branch
+    runs-on: macos-12
+    strategy:
+      matrix:
+        include:
+          - xcode: "14.2"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run export script
+        run: |
+          sh devtools/export-source-translation.sh
+      - name: Push source translations to Transifex
+        uses: transifex/cli-action@v2
+        with:
+          token: ${{ secrets.TX_TOKEN }}
+          args: push --branch ''
+      - name: Remove extraneous /tmp/tx file from running transifex cli that breaks the next pull step
+        run: |
+          rm -rf /tmp/tx
+      - name: Pull translations from Transifex
+        uses: transifex/cli-action@v2
+        with:
+          token: ${{ secrets.TX_TOKEN }}
+          args: pull --branch ''
+      - name: Commit translation changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update Translations 🤖
+          branch: translations
+          create_branch: true
+          push_options: '--force'
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "translations"
+          destination_branch: "master"
+          pr_title: "Update Translations 🤖"
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+
