@@ -40,7 +40,7 @@ struct ShareAction: View {
 
             HStack(alignment: .top, spacing: 25) {
                 
-                ShareActionButton(img: "link", text: NSLocalizedString("Copy Link", comment: "Button to copy link to note"), col: col) {
+                ShareActionButton(img: "link", text: NSLocalizedString("Copy Link TempChange", comment: "Button to copy link to note"), col: col) {
                     show_share_action = false
                     UIPasteboard.general.string = "https://damus.io/" + (bech32_note_id(event.id) ?? event.id)
                 }
