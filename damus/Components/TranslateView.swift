@@ -20,7 +20,7 @@ struct TranslateView: View {
     @State var translated_artifacts: NoteArtifacts? = nil
     
     var TranslateButton: some View {
-        Button(NSLocalizedString("Translate Note", comment: "Button to translate note from different language.")) {
+        Button(NSLocalizedString("Translate Note into your language", comment: "Button to translate note from different language.")) {
             show_translated_note = true
         }
         .translate_button_style()
