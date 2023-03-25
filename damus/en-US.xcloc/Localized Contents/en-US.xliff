@@ -336,9 +336,9 @@ Sentence composed of 2 variables to describe how many people are following a use
         <target>Copy LNURL</target>
         <note>Context menu option for copying a user's Lightning URL.</note>
       </trans-unit>
-      <trans-unit id="Copy Link" xml:space="preserve">
-        <source>Copy Link</source>
-        <target>Copy Link</target>
+      <trans-unit id="Copy Link TempChange" xml:space="preserve">
+        <source>Copy Link TempChange</source>
+        <target>Copy Link TempChange</target>
         <note>Button to copy link to note</note>
       </trans-unit>
       <trans-unit id="Copy Note ID" xml:space="preserve">
@@ -1170,9 +1170,9 @@ Picker option to indicate that a zap should be sent privately and not identify t
         <target>Thread</target>
         <note>Navigation bar title for note thread.</note>
       </trans-unit>
-      <trans-unit id="Translate Note" xml:space="preserve">
-        <source>Translate Note</source>
-        <target>Translate Note</target>
+      <trans-unit id="Translate Note into your language" xml:space="preserve">
+        <source>Translate Note into your language</source>
+        <target>Translate Note into your language</target>
         <note>Button to translate note from different language.</note>
       </trans-unit>
       <trans-unit id="Translated from (lang)" xml:space="preserve">
