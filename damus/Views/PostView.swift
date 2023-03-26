@@ -16,6 +16,7 @@ let POST_PLACEHOLDER = NSLocalizedString("Type your post here...", comment: "Tex
 
 struct PostView: View {
     @State var post: NSMutableAttributedString = NSMutableAttributedString()
+    @State var cursor: Int = 0
     @FocusState var focus: Bool
     @State var showPrivateKeyWarning: Bool = false
     @State var attach_media: Bool = false
@@ -104,7 +105,7 @@ struct PostView: View {
     
     var TextEntry: some View {
         ZStack(alignment: .topLeading) {
-            TextViewWrapper(attributedText: $post)
+            TextViewWrapper(attributedText: $post, cursor: $cursor)
                 .focused($focus)
                 .textInputAutocapitalization(.sentences)
                 .onChange(of: post) { _ in
@@ -191,7 +192,7 @@ struct PostView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            let searching = get_searching_string(post.string)
+            let searching = get_searching_string(post.string, cursor: cursor)
             
             TopBar
             
@@ -204,7 +205,7 @@ struct PostView: View {
             
             // This if-block observes @ for tagging
             if let searching {
-                UserSearch(damus_state: damus_state, search: searching, post: $post)
+                UserSearch(damus_state: damus_state, search: searching, post: $post, cursor: $cursor)
                     .frame(maxHeight: .infinity)
             } else {
                 Divider()
@@ -253,8 +254,12 @@ struct PostView: View {
     }
 }
 
-func get_searching_string(_ post: String) -> String? {
-    guard let last_word = post.components(separatedBy: .whitespacesAndNewlines).last else {
+func get_searching_string(_ post: String, cursor: Int) -> String? {
+    guard cursor > 0 else {
+        return nil
+    }
+
+    guard let last_word = post[...post.index(post.startIndex, offsetBy: cursor - 1)].components(separatedBy: .whitespacesAndNewlines).last else {
         return nil
     }
     

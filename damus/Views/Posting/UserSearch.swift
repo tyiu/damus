@@ -22,6 +22,7 @@ struct UserSearch: View {
     let search: String
 
     @Binding var post: NSMutableAttributedString
+    @Binding var cursor: Int
     
     var users: [SearchedUser] {
         guard let contacts = damus_state.contacts.event else {
@@ -36,38 +37,57 @@ struct UserSearch: View {
             return
         }
 
-        // Remove all characters after the last '@'
-        removeCharactersAfterLastAtSymbol()
+        // Remove all characters after the '@' and before the cursor
+        let newCursor = removeCharactersAfterAtSymbol()
 
         // Create and append the user tag
         let tagAttributedString = createUserTag(for: user, with: pk)
-        appendUserTag(tagAttributedString)
+        insertUserTag(tagAttributedString, cursor: newCursor)
+
+        cursor = newCursor
     }
     
-    private func removeCharactersAfterLastAtSymbol() {
-        while post.string.last != "@" {
-            post.deleteCharacters(in: NSRange(location: post.length - 1, length: 1))
+    private func removeCharactersAfterAtSymbol() -> Int {
+        let newCursor = cursor
+
+        guard newCursor > 0 else {
+            return 0
         }
-        post.deleteCharacters(in: NSRange(location: post.length - 1, length: 1))
+
+        var atSymbolOffset = newCursor
+        while atSymbolOffset > 0 && post.string[post.string.index(post.string.startIndex, offsetBy: atSymbolOffset - 1)] != "@" {
+            atSymbolOffset -= 1
+        }
+
+        var endOfWordOffset = newCursor
+        while endOfWordOffset < post.string.count && !post.string[post.string.index(post.string.startIndex, offsetBy: endOfWordOffset)].isWhitespace {
+            endOfWordOffset += 1
+        }
+
+        post.deleteCharacters(in: NSRange(location: atSymbolOffset - 1, length: endOfWordOffset - atSymbolOffset + 1))
+
+        return atSymbolOffset - 1
     }
 
     private func createUserTag(for user: SearchedUser, with pk: String) -> NSMutableAttributedString {
         let name = Profile.displayName(profile: user.profile, pubkey: pk).username
-        let tagString = "@\(name)\u{200B} "
+        let tagString = "\u{200B}@\(name)\u{200B} "
 
         let tagAttributedString = NSMutableAttributedString(string: tagString,
                                    attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18.0),
                                                 NSAttributedString.Key.link: "@\(pk)"])
+        tagAttributedString.removeAttribute(.link, range: NSRange(location: 0, length: 1))
         tagAttributedString.removeAttribute(.link, range: NSRange(location: tagAttributedString.length - 2, length: 2))
+        tagAttributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.label], range: NSRange(location: 0, length: 1))
         tagAttributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.label], range: NSRange(location: tagAttributedString.length - 2, length: 2))
         
         return tagAttributedString
     }
 
-    private func appendUserTag(_ tagAttributedString: NSMutableAttributedString) {
+    private func insertUserTag(_ tagAttributedString: NSMutableAttributedString, cursor: Int) {
         let mutableString = NSMutableAttributedString()
         mutableString.append(post)
-        mutableString.append(tagAttributedString)
+        mutableString.insert(tagAttributedString, at: cursor)
         post = mutableString
     }
     
@@ -88,9 +108,10 @@ struct UserSearch: View {
 struct UserSearch_Previews: PreviewProvider {
     static let search: String = "jb55"
     @State static var post: NSMutableAttributedString = NSMutableAttributedString(string: "some @jb55")
+    @State static var cursor: Int = 0
     
     static var previews: some View {
-        UserSearch(damus_state: test_damus_state(), search: search, post: $post)
+        UserSearch(damus_state: test_damus_state(), search: search, post: $post, cursor: $cursor)
     }
 }
 

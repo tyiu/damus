@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TextViewWrapper: UIViewRepresentable {
     @Binding var attributedText: NSMutableAttributedString
+    @Binding var cursor: Int
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
@@ -31,18 +32,21 @@ struct TextViewWrapper: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(attributedText: $attributedText)
+        Coordinator(attributedText: $attributedText, cursor: $cursor)
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
         @Binding var attributedText: NSMutableAttributedString
+        @Binding var cursor: Int
 
-        init(attributedText: Binding<NSMutableAttributedString>) {
+        init(attributedText: Binding<NSMutableAttributedString>, cursor: Binding<Int>) {
             _attributedText = attributedText
+            _cursor = cursor
         }
 
         func textViewDidChange(_ textView: UITextView) {
             attributedText = NSMutableAttributedString(attributedString: textView.attributedText)
+            cursor = textView.selectedRange.upperBound
         }
     }
 }
