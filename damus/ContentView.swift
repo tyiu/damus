@@ -609,6 +609,8 @@ struct ContentView: View {
         
         pool.register_handler(sub_id: sub_id, handler: home.handle_event)
 
+        let settings = UserSettingsStore()
+
         self.damus_state = DamusState(pool: pool,
                                       keypair: keypair,
                                       likes: EventCounter(our_pubkey: pubkey),
@@ -620,7 +622,7 @@ struct ContentView: View {
                                       previews: PreviewCache(),
                                       zaps: Zaps(our_pubkey: pubkey),
                                       lnurls: LNUrls(),
-                                      settings: UserSettingsStore(),
+                                      settings: settings,
                                       relay_filters: relay_filters,
                                       relay_metadata: metadatas,
                                       drafts: Drafts(),
@@ -628,7 +630,8 @@ struct ContentView: View {
                                       bookmarks: BookmarksManager(pubkey: pubkey),
                                       postbox: PostBox(pool: pool),
                                       bootstrap_relays: bootstrap_relays,
-                                      replies: ReplyCounter(our_pubkey: pubkey)
+                                      replies: ReplyCounter(our_pubkey: pubkey),
+                                      translations: Translations(settings)
         )
         home.damus_state = self.damus_state!
         

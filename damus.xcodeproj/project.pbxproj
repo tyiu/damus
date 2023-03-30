@@ -17,6 +17,7 @@
 		3A3040F329A91366008A0F29 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3040F229A91366008A0F29 /* ProfileViewTests.swift */; };
 		3A30410129AB12AA008A0F29 /* EventGroupViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30410029AB12AA008A0F29 /* EventGroupViewTests.swift */; };
 		3A4325A82961E11400BFCD9D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 3A4325AA2961E11400BFCD9D /* Localizable.stringsdict */; };
+		3A48E23B29D518F000BA313D /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A48E23A29D518F000BA313D /* Translations.swift */; };
 		3AA247FD297E3CFF0090C62D /* RepostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA247FC297E3CFF0090C62D /* RepostsModel.swift */; };
 		3AA247FF297E3D900090C62D /* RepostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA247FE297E3D900090C62D /* RepostsView.swift */; };
 		3AA24802297E3DC20090C62D /* RepostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA24801297E3DC20090C62D /* RepostView.swift */; };
@@ -323,6 +324,7 @@
 		3A41E559299D52BE001FA465 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A41E55A299D52BE001FA465 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A41E55B299D52BE001FA465 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = id; path = id.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		3A48E23A29D518F000BA313D /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		3A4F3320297CCFEE004B5F72 /* fr-FR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-FR"; path = "fr-FR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A4F3321297CCFEE004B5F72 /* fr-FR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-FR"; path = "fr-FR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3A4F3322297CCFEE004B5F72 /* fr-FR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "fr-FR"; path = "fr-FR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 				3AA59D1C2999B0400061C48E /* DraftsModel.swift */,
 				4C54AA0629A540BA003E4487 /* NotificationsModel.swift */,
 				4CD348EE29C3659D00497EB2 /* ImageUploadModel.swift */,
+				3A48E23A29D518F000BA313D /* Translations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1663,6 +1666,7 @@
 				4CACA9D5280C31E100D9BBE8 /* ReplyView.swift in Sources */,
 				F7908E92298B0F0700AB113A /* RelayDetailView.swift in Sources */,
 				4C3A1D332960DB0500558C0F /* Markdown.swift in Sources */,
+				3A48E23B29D518F000BA313D /* Translations.swift in Sources */,
 				4CE879552996BAB900F758CC /* RelayPaidDetail.swift in Sources */,
 				4CF0ABD42980996B00D66079 /* Report.swift in Sources */,
 				4C06670B28FDE64700038D2A /* damus.c in Sources */,
