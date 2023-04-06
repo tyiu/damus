@@ -29,6 +29,7 @@ struct NoteContentView: View {
     let size: EventViewKind
     let preview_height: CGFloat?
     let options: EventViewOptions
+    let translatable: Bool
 
     @State var artifacts: NoteArtifacts
     @State var preview: LinkViewRepresentable?
@@ -39,6 +40,7 @@ struct NoteContentView: View {
         self.show_images = show_images
         self.size = size
         self.options = options
+        self.translatable = damus_state.translations.shouldTranslate(event, state: damus_state)
         self._artifacts = State(initialValue: artifacts)
         self.preview_height = lookup_cached_preview_size(previews: damus_state.previews, evid: event.id)
         self._preview = State(initialValue: load_cached_preview(previews: damus_state.previews, evid: event.id))
@@ -100,11 +102,13 @@ struct NoteContentView: View {
                 }
             }
 
-            if with_padding {
-                translateView
-                    .padding(.horizontal)
-            } else {
-                translateView
+            if translatable {
+                if with_padding {
+                    translateView
+                        .padding(.horizontal)
+                } else {
+                    translateView
+                }
             }
 
             if show_images && artifacts.images.count > 0 {

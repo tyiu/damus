@@ -56,6 +56,29 @@ class Translations: ObservableObject {
         return language
     }
 
+    /**
+     Returns true if the given translation is effectively the same as the original note, ignoring whitespaces and new lines.
+     */
+    private func translationSameAsOriginal(_ translation: String, event: NostrEvent, state: DamusState) -> Bool {
+        return translation.trimmingCharacters(in: .whitespacesAndNewlines) == event.get_content(state.keypair.privkey).trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    func hasCachedTranslation(_ event: NostrEvent) -> Bool {
+        return languages[event] != nil
+    }
+
+    func cachedTranslation(_ event: NostrEvent) -> TranslationWithLanguage? {
+        if let cachedLanguage = languages[event] {
+            if let cachedTranslation = translations[event] {
+                return TranslationWithLanguage(translation: cachedTranslation, language: cachedLanguage)
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+
     func translate(_ event: NostrEvent, state: DamusState) async -> TranslationWithLanguage? {
         guard shouldTranslate(event, state: state) else {
             return nil
@@ -65,30 +88,29 @@ class Translations: ObservableObject {
             return nil
         }
 
-        let translationWithLanguage: TranslationWithLanguage
-
-        if let cachedTranslation = translations[event] {
-            translationWithLanguage = TranslationWithLanguage(translation: cachedTranslation, language: noteLanguage)
-        } else {
-            do {
-                guard let _translationWithLanguage = try await translator.translate(event.get_content(state.keypair.privkey), from: noteLanguage, to: targetLanguage) else {
-                    return nil
-                }
-
-                translationWithLanguage = _translationWithLanguage
-                translations[event] = translationWithLanguage.translation
-                languages[event] = translationWithLanguage.language
-            } catch {
-                return nil
-            }
+        if languages[event] != nil {
+            return cachedTranslation(event)
         }
 
-        // If the translated content is identical to the original content, don't return the translation.
-        if translationWithLanguage.translation == event.get_content(state.keypair.privkey) {
-            languages[event] = targetLanguage
+        do {
+            guard let translationWithLanguage = try await translator.translate(event.get_content(state.keypair.privkey), from: noteLanguage, to: targetLanguage) else {
+                return nil
+            }
+
+            // If the translated content is identical to the original content, don't return the translation.
+            if translationSameAsOriginal(translationWithLanguage.translation, event: event, state: state) {
+                // Nil out the translation as it's the same as the original.
+                translations[event] = nil
+                // Leave an entry so that we don't attempt to translate it again in the future.
+                languages[event] = targetLanguage
+                return nil
+            } else {
+                translations[event] = translationWithLanguage.translation
+                languages[event] = translationWithLanguage.language
+                return translationWithLanguage
+            }
+        } catch {
             return nil
-        } else {
-            return translationWithLanguage
         }
     }
 
@@ -99,18 +121,30 @@ class Translations: ObservableObject {
             return false
         }
 
+        // Avoid translating if no translation service is configured.
+        switch settings.translation_service {
+        case .none:
+            return false
+        case .libretranslate:
+            if URLComponents(string: settings.libretranslate_url) == nil {
+                return false
+            }
+        case .deepl:
+            if settings.deepl_api_key == "" {
+                return false
+            }
+        }
+
+        // If translation was attempted before, use the results of the cached translation to determine if it should be shown.
+        if languages[event] != nil {
+            return translations[event] != nil
+        }
+
         // Avoid translating notes if language cannot be detected or if it is in one of the user's preferred languages.
         guard let noteLanguage = detectLanguage(event, state: state), !preferredLanguages.contains(noteLanguage) else {
             return false
         }
 
-        switch settings.translation_service {
-        case .none:
-            return false
-        case .libretranslate:
-            return URLComponents(string: settings.libretranslate_url) != nil
-        case .deepl:
-            return settings.deepl_api_key != ""
-        }
+        return true
     }
 }

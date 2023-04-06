@@ -14,13 +14,31 @@ struct TranslateView: View {
     let size: EventViewKind
     
     @State var checkingTranslationStatus: Bool = false
-    @State var currentLanguage: String = "en"
-    @State var noteLanguage: String? = nil
-    @State var show_translated_note: Bool = false
-    @State var translated_artifacts: NoteArtifacts? = nil
-    @State var translatable: Bool = false
+    @State var translatable: Bool = true
+
+    @State var noteLanguage: String?
+    @State var show_translated_note: Bool
+    @State var translated_artifacts: NoteArtifacts?
 
     let preferredLanguages = Set(Locale.preferredLanguages.map { localeToLanguage($0) })
+
+    init(damus_state: DamusState, event: NostrEvent, size: EventViewKind) {
+        self.damus_state = damus_state
+        self.event = event
+        self.size = size
+        self._noteLanguage = State(initialValue: damus_state.translations.detectLanguage(event, state: damus_state))
+
+        if let translationWithLanguage = damus_state.translations.cachedTranslation(event) {
+            self._noteLanguage = State(initialValue: translationWithLanguage.language)
+
+            let translatedBlocks = event.get_blocks(content: translationWithLanguage.translation)
+            self._translated_artifacts = State.init(initialValue: render_blocks(blocks: translatedBlocks, profiles: damus_state.profiles, privkey: damus_state.keypair.privkey))
+        } else {
+            self._translated_artifacts = State(initialValue: nil)
+        }
+
+        self._show_translated_note = State(initialValue: damus_state.settings.auto_translate)
+    }
     
     var TranslateButton: some View {
         Button(NSLocalizedString("Translate Note", comment: "Button to translate note from different language.")) {
@@ -42,8 +60,9 @@ struct TranslateView: View {
             let translationWithLanguage = await damus_state.translations.translate(event, state: damus_state)
             DispatchQueue.main.async {
                 guard translationWithLanguage != nil else {
-                    noteLanguage = currentLanguage
+                    noteLanguage = damus_state.translations.targetLanguage
                     checkingTranslationStatus = false
+                    show_translated_note = false
                     translatable = false
                     return
                 }
@@ -53,6 +72,8 @@ struct TranslateView: View {
                 // Render translated note.
                 let translatedBlocks = event.get_blocks(content: translationWithLanguage!.translation)
                 translated_artifacts = render_blocks(blocks: translatedBlocks, profiles: damus_state.profiles, privkey: damus_state.keypair.privkey)
+
+                translatable = true
 
                 checkingTranslationStatus = false
             }
@@ -72,11 +93,15 @@ struct TranslateView: View {
     
     func MainContent(note_lang: String) -> some View {
         return Group {
-            let languageName = Locale.current.localizedString(forLanguageCode: note_lang)
-            if let languageName, let translated_artifacts, show_translated_note {
-                Translated(lang: languageName, artifacts: translated_artifacts)
-            } else if !damus_state.settings.auto_translate {
-                TranslateButton
+            if translatable {
+                let languageName = Locale.current.localizedString(forLanguageCode: note_lang)
+                if let languageName, let translated_artifacts, show_translated_note {
+                    Translated(lang: languageName, artifacts: translated_artifacts)
+                } else if !damus_state.settings.auto_translate {
+                    TranslateButton
+                } else {
+                    EmptyView()
+                }
             } else {
                 EmptyView()
             }
@@ -85,23 +110,15 @@ struct TranslateView: View {
     
     var body: some View {
         Group {
-            if let note_lang = noteLanguage, noteLanguage != currentLanguage {
+            if let note_lang = noteLanguage, note_lang != damus_state.translations.targetLanguage {
                 MainContent(note_lang: note_lang)
+                    .task {
+                        if show_translated_note {
+                            processTranslation()
+                        }
+                    }
             } else {
                 Text("")
-            }
-        }
-        .task {
-            DispatchQueue.main.async {
-                currentLanguage = damus_state.translations.targetLanguage
-                noteLanguage = damus_state.translations.detectLanguage(event, state: damus_state)
-                translatable = damus_state.translations.shouldTranslate(event, state: damus_state)
-
-                let autoTranslate = damus_state.settings.auto_translate
-                if autoTranslate {
-                    processTranslation()
-                }
-                show_translated_note = autoTranslate
             }
         }
     }
