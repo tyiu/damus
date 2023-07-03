@@ -14,6 +14,8 @@ struct ReportView: View {
      
     @State var report_sent: Bool = false
     @State var report_id: String = ""
+    @State var report_message: String = ""
+    @State var selected_report_type: ReportType?
     
     var body: some View {
         if report_sent {
@@ -43,8 +45,8 @@ struct ReportView: View {
         .padding()
     }
     
-    func do_send_report(type: ReportType) {
-        guard let ev = send_report(privkey: privkey, postbox: postbox, target: target, type: type) else {
+    func do_send_report() {
+        guard let selected_report_type, let ev = send_report(privkey: privkey, postbox: postbox, target: target, type: selected_report_type, message: report_message) else {
             return
         }
         
@@ -54,6 +56,15 @@ struct ReportView: View {
         
         report_sent = true
         report_id = note_id
+    }
+
+    var send_report_button_text: String {
+        switch target {
+        case .note:
+            return NSLocalizedString("Report Note", comment: "Button to report a note.")
+        case .user:
+            return NSLocalizedString("Report User", comment: "Button to report a user.")
+        }
     }
     
     var MainForm: some View {
@@ -65,23 +76,27 @@ struct ReportView: View {
             
         Form {
             Section(content: {
-                Button(NSLocalizedString("It's spam", comment: "Button for user to report that the account or content has spam.")) {
-                    do_send_report(type: .spam)
-                }
-                
-                Button(NSLocalizedString("Nudity or explicit content", comment: "Button for user to report that the account or content has nudity or explicit content.")) {
-                    do_send_report(type: .explicit)
-                }
-                
-                       Button(NSLocalizedString("Illegal content", comment: "Button for user to report that the account or content has illegal content.")) {
-                    do_send_report(type: .illegal)
-                }
-                
-                if case .user = target {
-                    Button(NSLocalizedString("They are impersonating someone", comment: "Button for user to report that the account is impersonating someone.")) {
-                        do_send_report(type: .impersonation)
+                Picker("", selection: $selected_report_type) {
+                    ForEach(ReportType.allCases, id: \.self) { report_type in
+                        // Impersonation type is not supported when reporting notes.
+                        if case .note = target, report_type != .impersonation {
+                            Text(verbatim: String(describing: report_type))
+                                .tag(Optional(report_type))
+                        } else if case .user = target {
+                            Text(verbatim: String(describing: report_type))
+                                .tag(Optional(report_type))
+                        }
                     }
                 }
+                .labelsHidden()
+                .pickerStyle(.inline)
+
+                TextField(NSLocalizedString("Additional information (optional)", comment: "Prompt to enter optional additional information when reporting an account or content."), text: $report_message, axis: .vertical)
+
+                Button(send_report_button_text) {
+                    do_send_report()
+                }
+                .disabled(selected_report_type == nil)
             }, header: {
                 Text("What do you want to report?", comment: "Header text to prompt user what issue they want to report.")
             }, footer: {
@@ -92,8 +107,8 @@ struct ReportView: View {
     }
 }
 
-func send_report(privkey: String, postbox: PostBox, target: ReportTarget, type: ReportType) -> NostrEvent? {
-    let report = Report(type: type, target: target, message: "")
+func send_report(privkey: String, postbox: PostBox, target: ReportTarget, type: ReportType, message: String) -> NostrEvent? {
+    let report = Report(type: type, target: target, message: message)
     guard let ev = create_report_event(privkey: privkey, report: report) else {
         return nil
     }
