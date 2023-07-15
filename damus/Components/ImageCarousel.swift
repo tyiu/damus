@@ -209,30 +209,9 @@ struct ImageCarousel: View {
                 .onTapGesture { }
             
             // This is our custom carousel image indicator
-            CarouselDotsView(urls: urls, selectedIndex: $selectedIndex)
-        }
-    }
-}
-
-// MARK: - Custom Carousel
-struct CarouselDotsView<T>: View {
-    let urls: [T]
-    @Binding var selectedIndex: Int
-
-    var body: some View {
-        if urls.count > 1 {
-            HStack {
-                ForEach(urls.indices, id: \.self) { index in
-                    Circle()
-                        .fill(index == selectedIndex ? Color("DamusPurple") : Color("DamusLightGrey"))
-                        .frame(width: 10, height: 10)
-                        .onTapGesture {
-                            selectedIndex = index
-                        }
-                }
-            }
-            .padding(.top, CGFloat(8))
-            .id(UUID())
+            // A maximum of 18 should be visible. Any more than that and it starts to push the frame of the parent view
+            // causing adjacent views to disort in dimensions.
+            CarouselDotsView(maxCount: urls.count, maxVisibleCount: 18, selectedIndex: $selectedIndex)
         }
     }
 }

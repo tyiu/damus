@@ -18,19 +18,6 @@ struct ImageView: View {
     
     let disable_animation: Bool
     
-    var tabViewIndicator: some View {
-        HStack(spacing: 10) {
-            ForEach(urls.indices, id: \.self) { index in
-                Capsule()
-                    .fill(index == selectedIndex ? Color(UIColor.label) : Color.secondary)
-                    .frame(width: 7, height: 7)
-            }
-        }
-        .padding()
-        .background(.regularMaterial)
-        .clipShape(Capsule())
-    }
-    
     var body: some View {
         ZStack {
             Color(.systemBackground)
@@ -66,7 +53,7 @@ struct ImageView: View {
                         Spacer()
                         
                         if (urls.count > 1) {
-                            tabViewIndicator
+                            CarouselDotsView(maxCount: urls.count, maxVisibleCount: 18, selectedIndex: $selectedIndex)
                         }
                     }
                 }
