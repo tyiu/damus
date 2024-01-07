@@ -406,31 +406,13 @@ extension NdbNote {
     func note_language(_ keypair: Keypair) -> String? {
         assert(!Thread.isMainThread, "This function must not be run on the main thread.")
 
-        // Rely on Apple's NLLanguageRecognizer to tell us which language it thinks the note is in
-        // and filter on only the text portions of the content as URLs and hashtags confuse the language recognizer.
-        let originalBlocks = self.blocks(keypair).blocks
-        let originalOnlyText = originalBlocks.compactMap {
-                if case .text(let txt) = $0 {
-                    return txt
-                }
-                else {
-                    return nil
-                }
-            }
-            .joined(separator: " ")
-
-        // Only accept language recognition hypothesis if there's at least a 50% probability that it's accurate.
-        let languageRecognizer = NLLanguageRecognizer()
-        languageRecognizer.processString(originalOnlyText)
-
-        guard let locale = languageRecognizer.languageHypotheses(withMaximum: 1).first(where: { $0.value >= 0.5 })?.key.rawValue else {
-            let nstr: String? = nil
-            return nstr
+        guard let languageHypothesis = self.blocks(keypair).languageHypothesis else {
+            return nil
         }
 
         // Remove the variant component and just take the language part as translation services typically only supports the variant-less language.
         // Moreover, speakers of one variant can generally understand other variants.
-        return localeToLanguage(locale)
+        return localeToLanguage(languageHypothesis.rawValue)
     }
 
     var age: TimeInterval {

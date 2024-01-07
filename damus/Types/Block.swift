@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import NaturalLanguage
 
 fileprivate extension String {
     /// Failable initializer to build a Swift.String from a C-backed `str_block_t`.
@@ -216,5 +216,53 @@ extension Block {
         case .invoice(let inv):
             return inv.string
         }
+    }
+}
+
+extension Blocks {
+
+    /// Returns a language hypothesis represented as an ``NLLanguage`` (determined by ``NLLanguageRecognizer``),
+    /// which is the most likely language detected using the combination of blocks. If it cannot determine one, `nil` is returned.
+    var languageHypothesis: NLLanguage? {
+        // Rely on Apple's NLLanguageRecognizer to tell us which language it thinks the blocks are in
+        // and filter on only the text portions of the content as URLs, hashtags, and anything else confuse the language recognizer.
+        let originalOnlyText = blocks.compactMap {
+                if case .text(let txt) = $0 {
+                    // Replacing right single quotation marks (’) with "typewriter or ASCII apostrophes" (')
+                    // as a workaround to get Apple's language recognizer to predict language the correctly.
+                    // It is important to add this workaround to get the language right because it wastes users' money to send translation requests.
+                    // Until Apple fixes their language model, this workaround will be kept in place.
+                    // See https://en.wikipedia.org/wiki/Apostrophe#Unicode for an explanation of the differences between the two characters.
+                    //
+                    // For example,
+                    // "nevent1qqs0wsknetaju06xk39cv8sttd064amkykqalvfue7ydtg3p0lyfksqzyrhxagf6h8l9cjngatumrg60uq22v66qz979pm32v985ek54ndh8gj42wtp"
+                    // has the note content "It’s a meme".
+                    // Without the character replacement, it is 61% confident that the text is in Turkish (tr) and 8% confident that the text is in English (en),
+                    // which is a wildly incorrect hypothesis.
+                    // With the character replacement, it is 65% confident that the text is in English (en) and 24% confident that the text is in Turkish (tr), which is more accurate.
+                    //
+                    // Similarly,
+                    // "nevent1qqspjqlln6wvxrqg6kzl2p7gk0rgr5stc7zz5sstl34cxlw55gvtylgpp4mhxue69uhkummn9ekx7mqpr4mhxue69uhkummnw3ez6ur4vgh8wetvd3hhyer9wghxuet5qy28wumn8ghj7un9d3shjtnwdaehgu3wvfnsygpx6655ve67vqlcme9ld7ww73pqx7msclhwzu8lqmkhvuluxnyc7yhf3xut"
+                    // has the note content "You’re funner".
+                    // Without the character replacement, it is 52% confident that the text is in Norwegian Bokmål (nb) and 41% confident that the text is in English (en).
+                    // With the character replacement, it is 93% confident that the text is in English (en) and 4% confident that the text is in Norwegian Bokmål (nb).
+                    return txt.replacingOccurrences(of: "’", with: "'")
+                }
+                else {
+                    return nil
+                }
+            }
+            .joined(separator: " ")
+
+        // If there is no text, there's nothing to use to detect language.
+        guard !originalOnlyText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return nil
+        }
+
+        let languageRecognizer = NLLanguageRecognizer()
+        languageRecognizer.processString(originalOnlyText)
+
+        // Only accept language recognition hypothesis if there's at least a 50% probability that it's accurate.
+        return languageRecognizer.languageHypotheses(withMaximum: 1).first(where: { $0.value >= 0.5 })?.key
     }
 }

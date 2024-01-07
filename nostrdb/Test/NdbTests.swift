@@ -281,5 +281,19 @@ final class NdbTests: XCTestCase {
 
     }
 
+    func test_note_language_english_with_right_single_quotation_mark() throws {
+        let note = try XCTUnwrap(NdbNote.owned_from_json(json: test_english_text_note_with_right_single_quotation_mark))
+        Task {
+            XCTAssertEqual(note.note_language(test_keypair), "en")
+        }
+    }
+
+    func test_note_language_non_english() throws {
+        let note = try XCTUnwrap(NdbNote.owned_from_json(json: test_japanese_text_note))
+        Task {
+            XCTAssertEqual(note.note_language(test_keypair), "ja")
+        }
+    }
+
 }
 

@@ -22,7 +22,17 @@ public struct Translator {
         self.purple = purple
     }
 
+    /// Returns true if the translator should attempt to translate from the source language to the target language and valid translation service settings are configured.
+    func shouldTranslate(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+        return sourceLanguage != targetLanguage && userSettingsStore.can_translate
+    }
+
     public func translate(_ text: String, from sourceLanguage: String, to targetLanguage: String) async throws -> String? {
+        // Do not attempt to translate if the source and target languages are the same.
+        guard shouldTranslate(from: sourceLanguage, to: targetLanguage) else {
+            return nil
+        }
+
         switch userSettingsStore.translation_service {
         case .purple:
             return try await translateWithPurple(text, from: sourceLanguage, to: targetLanguage)
@@ -35,7 +45,7 @@ public struct Translator {
         case .deepl:
             return try await translateWithDeepL(text, from: sourceLanguage, to: targetLanguage)
         case .none:
-            return text
+            return nil
         }
     }
 
