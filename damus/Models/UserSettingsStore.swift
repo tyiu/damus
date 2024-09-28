@@ -180,6 +180,9 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "auto_translate", default_value: true)
     var auto_translate: Bool
 
+    @Setting(key: "translate_offline", default_value: true)
+    var translate_offline: Bool
+
     @Setting(key: "show_general_statuses", default_value: true)
     var show_general_statuses: Bool
 

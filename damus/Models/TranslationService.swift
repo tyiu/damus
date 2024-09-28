@@ -39,7 +39,7 @@ enum TranslationService: String, CaseIterable, Identifiable, StringCodable {
         switch self {
         case .none:
             let displayName: String
-            if TranslationService.isAppleTranslationPopoverSupported {
+            if TranslationService.isAppleTranslationSupported {
                 displayName = NSLocalizedString("apple_translation_service", value: "Apple", comment: "Dropdown option for selecting Apple as a translation service.")
             } else {
                 displayName = NSLocalizedString("none_translation_service", value: "None", comment: "Dropdown option for selecting no translation service.")
@@ -58,11 +58,15 @@ enum TranslationService: String, CaseIterable, Identifiable, StringCodable {
         }
     }
 
-    static var isAppleTranslationPopoverSupported: Bool {
+    static var isAppleTranslationSupported: Bool {
+#if targetEnvironment(macCatalyst)
+        return false
+#else
         if #available(iOS 17.4, macOS 14.4, *) {
             return true
         } else {
             return false
         }
+#endif
     }
 }

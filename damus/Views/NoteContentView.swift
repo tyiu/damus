@@ -99,7 +99,17 @@ struct NoteContentView: View {
     }
 
     var translateView: some View {
+#if targetEnvironment(macCatalyst)
         TranslateView(damus_state: damus_state, event: event, size: self.size, isAppleTranslationPopoverPresented: $isAppleTranslationPopoverPresented)
+#else
+        if #available(iOS 18.0, macOS 15.0, *), damus_state.settings.translate_offline {
+            AnyView(OfflineTranslateView(damus_state: damus_state, event: event, size: self.size))
+        } else {
+            AnyView(
+                TranslateView(damus_state: damus_state, event: event, size: self.size, isAppleTranslationPopoverPresented: $isAppleTranslationPopoverPresented)
+            )
+        }
+#endif
     }
     
     func previewView(links: [URL]) -> some View {
@@ -148,7 +158,7 @@ struct NoteContentView: View {
                 }
             }
 
-            if !options.contains(.no_translate) && (size == .selected || TranslationService.isAppleTranslationPopoverSupported || damus_state.settings.auto_translate) {
+            if !options.contains(.no_translate) && (size == .selected || TranslationService.isAppleTranslationSupported || damus_state.settings.auto_translate) {
                 if with_padding {
                     translateView
                         .padding(.horizontal)
@@ -301,9 +311,13 @@ struct NoteContentView: View {
                 Markdown(md.markdown)
                     .padding([.leading, .trailing, .top])
             case .separated(let separated):
-                if #available(iOS 17.4, macOS 14.4, *) {
+                if #available(iOS 18.0, macOS 15.0, *), damus_state.settings.auto_translate {
                     MainContent(artifacts: separated)
+                } else if #available(iOS 17.4, macOS 14.4, *) {
+                    MainContent(artifacts: separated)
+#if !targetEnvironment(macCatalyst)
                         .translationPresentation(isPresented: $isAppleTranslationPopoverPresented, text: event.get_content(damus_state.keypair))
+#endif
                 } else {
                     MainContent(artifacts: separated)
                 }

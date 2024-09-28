@@ -85,7 +85,7 @@ struct TranslateView: View {
             return false
         }
 
-        if TranslationService.isAppleTranslationPopoverSupported {
+        if TranslationService.isAppleTranslationSupported {
             return damus_state.settings.translation_service == .none || damus_state.settings.can_translate
         } else {
             return damus_state.settings.can_translate

@@ -12,7 +12,7 @@ struct TranslationSettingsView: View {
     @ObservedObject var settings: UserSettingsStore
     var damus_state: DamusState
     
-    @Environment(\.dismiss) var dismiss    
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         Form {
@@ -101,19 +101,49 @@ struct TranslationSettingsView: View {
                     Toggle(NSLocalizedString("Translate DMs", comment: "Toggle to translate direct messages."), isOn: $settings.translate_dms)
                         .toggleStyle(.switch)
                      */
-                } else if #available(iOS 18.0, *) {
-                    Toggle(NSLocalizedString("Automatically translate notes", comment: "Toggle to automatically translate notes."), isOn: $settings.auto_translate)
-                        .toggleStyle(.switch)
                 }
             }
 
-            if #available(iOS 18.0, *) {
+#if !targetEnvironment(macCatalyst)
+            if #available(iOS 18.0, macOS 15.0, *), settings.translation_service == .none {
+                Toggle(NSLocalizedString("Automatically translate notes", comment: "Toggle to automatically translate notes."), isOn: $settings.auto_translate)
+                    .toggleStyle(.switch)
+
+                Section (
+                    content: {
+                        Toggle(NSLocalizedString("On-Device Mode", comment: "Toggle to always translate offline using downloaded languages."), isOn: $settings.translate_offline)
+                    }, footer: {
+                        Text("Always translate offline using downloaded languages. Offline translations may not be as accurate as online translations. Apple may collect usage metrics, but this data does not include the original or translated content.", comment: "Section footer explaining the implications of enabling offline translations.")
+                    }
+                )
+
                 AppleTranslationSettingsView(settings: settings)
             }
+#endif
         }
         .navigationTitle(NSLocalizedString("Translation", comment: "Navigation title for translation settings."))
         .onReceive(handle_notify(.switched_timeline)) { _ in
             dismiss()
+        }
+        .onChange(of: settings.auto_translate) { newValue in
+            // Apple automatic translation can occur only if offline translations are enabled.
+            if settings.translation_service == .none && newValue && !settings.translate_offline {
+                settings.translate_offline = true
+            }
+        }
+        .onChange(of: settings.translate_offline) { newValue in
+            // Apple automatic translation can occur only if offline translations are enabled.
+            if settings.translation_service == .none && !newValue && settings.auto_translate {
+                settings.auto_translate = false
+            }
+        }
+        .onChange(of: settings.translation_service) { newValue in
+            // Apple automatic translation can occur only if offline translations are enabled.
+            // If automatic translations are enabled for a non-Apple translation service,
+            // and then the translation service is switched to Apple, offline translations need to be enabled.
+            if newValue == .none && settings.auto_translate && !settings.translate_offline {
+                settings.translate_offline = true
+            }
         }
     }
 }
