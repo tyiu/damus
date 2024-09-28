@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Translation
 
 struct TranslationSettingsView: View {
     @ObservedObject var settings: UserSettingsStore
     var damus_state: DamusState
     
-    @Environment(\.dismiss) var dismiss
-    
+    @Environment(\.dismiss) var dismiss    
+
     var body: some View {
         Form {
             Section(NSLocalizedString("Translations", comment: "Section title for selecting the translation service.")) {
@@ -100,7 +101,14 @@ struct TranslationSettingsView: View {
                     Toggle(NSLocalizedString("Translate DMs", comment: "Toggle to translate direct messages."), isOn: $settings.translate_dms)
                         .toggleStyle(.switch)
                      */
+                } else if #available(iOS 18.0, *) {
+                    Toggle(NSLocalizedString("Automatically translate notes", comment: "Toggle to automatically translate notes."), isOn: $settings.auto_translate)
+                        .toggleStyle(.switch)
                 }
+            }
+
+            if #available(iOS 18.0, *) {
+                AppleTranslationSettingsView(settings: settings)
             }
         }
         .navigationTitle(NSLocalizedString("Translation", comment: "Navigation title for translation settings."))
