@@ -165,6 +165,12 @@ class PostBox {
             return
         }
 
+        // Don't add event if it's a NIP-17 direct message kind or a NIP-59 seal event kind to avoid leaking private information.
+        // DMs should be sealed and gift wrapped.
+        if event.known_kind == .dm || event.known_kind == .seal {
+            return
+        }
+
         let remaining = to ?? pool.our_descriptors.map { $0.url }
         let after = delay.map { d in Date.now.addingTimeInterval(d) }
         let posted_ev = PostedEvent(event: event, remaining: remaining, skip_ephemeral: skip_ephemeral, flush_after: after, on_flush: on_flush)

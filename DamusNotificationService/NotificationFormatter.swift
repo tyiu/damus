@@ -26,7 +26,7 @@ struct NotificationFormatter {
                 content.title = NSLocalizedString("Someone posted a note", comment: "Title label for push notification where someone posted a note")
                 content.body = event.content
                 break
-            case .dm:
+            case .deprecated_dm:
                 content.title = NSLocalizedString("New message", comment: "Title label for push notifications where a direct message was sent to the user")
                 content.body = NSLocalizedString("(Contents are encrypted)", comment: "Label on push notification indicating that the contents of the message are encrypted")
                 break

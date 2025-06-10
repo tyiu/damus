@@ -113,7 +113,7 @@ func generate_local_notification_object(from ev: NostrEvent, state: HeadlessDamu
             return LocalNotification(type: .like, event: ev, target: .note_id(evid), content: "")
         }
     }
-    else if type == .dm,
+    else if type == .deprecated_dm,
             state.settings.dm_notification {
         let convo = ev.decrypted(keypair: state.keypair) ?? NSLocalizedString("New encrypted direct message", comment: "Notification that the user has received a new direct message")
         return LocalNotification(type: .dm, event: ev, target: .note(ev), content: convo)

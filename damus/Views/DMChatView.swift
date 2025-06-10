@@ -108,7 +108,7 @@ struct DMChatView: View, KeyboardReadable {
                 Button(
                     role: .none,
                     action: {
-                        send_message()
+                        send_message_nip04()
                     }
                 ) {
                     Label("", image: "send")
@@ -124,7 +124,33 @@ struct DMChatView: View, KeyboardReadable {
          */
     }
 
-    func send_message() {
+    func send_message_nip17() {
+        guard let fullKeypair = damus_state.keypair.to_full() else {
+            return
+        }
+
+        let tags = [["p", pubkey.hex()]]
+        let post_blocks = parse_post_blocks(content: dms.draft)
+        let content = post_blocks
+            .map(\.asString)
+            .joined(separator: "")
+
+        guard let fullKeypair = damus_state.keypair.to_full(),
+              let dm = NIP17.giftWrappedDirectMessage(message: content, senderKeypair: fullKeypair, receiverPubkey: pubkey)
+        else {
+            return
+        }
+
+        dms.draft = ""
+
+        damus_state.nostrNetwork.postbox.send(dm)
+
+        handle_incoming_dm(ev: dm, our_pubkey: damus_state.pubkey, dms: damus_state.dms, prev_events: NewEventsBits())
+
+        end_editing()
+    }
+
+    func send_message_nip04() {
         let tags = [["p", pubkey.hex()]]
         let post_blocks = parse_post_blocks(content: dms.draft)
         let content = post_blocks

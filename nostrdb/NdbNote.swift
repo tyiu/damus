@@ -174,9 +174,9 @@ class NdbNote: Codable, Equatable, Hashable {
         let tags = try container.decode([[String]].self, forKey: .tags)
         let createdAt = try container.decode(UInt32.self, forKey: .created_at)
         let noteId = try container.decode(NoteId.self, forKey: .id)
-        let signature = try container.decode(Signature.self, forKey: .sig)
-        
-        guard let note = NdbNote.init(content: content, author: pubkey, kind: kind, tags: tags, createdAt: createdAt, id: noteId, sig: signature) else {
+        let signature = try? container.decode(Signature.self, forKey: .sig)
+
+        guard let note = NdbNote.init(content: content, author: pubkey, kind: kind, tags: tags, createdAt: createdAt, id: noteId, sig: signature ?? Signature(Data(repeating: 0, count: 128))) else {
             throw DecodingError.initializationFailed
         }
         
@@ -456,7 +456,7 @@ extension NdbNote {
     }
 
     func get_content(_ keypair: Keypair) -> String {
-        if known_kind == .dm {
+        if known_kind == .deprecated_dm {
             return decrypted(keypair: keypair) ?? "*failed to decrypt content*"
         }
         else if known_kind == .highlight {
@@ -467,7 +467,7 @@ extension NdbNote {
     }
 
     func maybe_get_content(_ keypair: Keypair) -> String? {
-        if known_kind == .dm {
+        if known_kind == .deprecated_dm {
             return decrypted(keypair: keypair)
         }
 

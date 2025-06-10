@@ -12,6 +12,12 @@
 		3169CAE6294E69C000EE4006 /* EmptyTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169CAE5294E69C000EE4006 /* EmptyTimelineView.swift */; };
 		3169CAED294FCCFC00EE4006 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169CAEC294FCCFC00EE4006 /* Constants.swift */; };
 		31D2E847295218AF006D67F8 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D2E846295218AF006D67F8 /* Shimmer.swift */; };
+		3A04DA252E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA212E1F40AC00449A0B /* NIP17DirectMessage.swift */; };
+		3A04DA262E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA232E1F40AC00449A0B /* NIP59GiftWrap.swift */; };
+		3A04DA272E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA212E1F40AC00449A0B /* NIP17DirectMessage.swift */; };
+		3A04DA282E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA232E1F40AC00449A0B /* NIP59GiftWrap.swift */; };
+		3A04DA292E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA212E1F40AC00449A0B /* NIP17DirectMessage.swift */; };
+		3A04DA2A2E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04DA232E1F40AC00449A0B /* NIP59GiftWrap.swift */; };
 		3A0A30BB2C21397A00F8C9BC /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0A30BA2C21397A00F8C9BC /* EmojiPicker */; };
 		3A23838E2A297DD200E5AA2E /* ZapButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23838D2A297DD200E5AA2E /* ZapButtonModel.swift */; };
 		3A2BAC5A2DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BAC592DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift */; };
@@ -1862,6 +1868,8 @@
 		3169CAE5294E69C000EE4006 /* EmptyTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTimelineView.swift; sourceTree = "<group>"; };
 		3169CAEC294FCCFC00EE4006 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = damus/Util/Constants.swift; sourceTree = SOURCE_ROOT; };
 		31D2E846295218AF006D67F8 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		3A04DA212E1F40AC00449A0B /* NIP17DirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIP17DirectMessage.swift; sourceTree = "<group>"; };
+		3A04DA232E1F40AC00449A0B /* NIP59GiftWrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIP59GiftWrap.swift; sourceTree = "<group>"; };
 		3A185A04297F2C3800F4BDC0 /* lv-LV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lv-LV"; path = "lv-LV.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A185A05297F2C3800F4BDC0 /* lv-LV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lv-LV"; path = "lv-LV.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3A185A06297F2C3800F4BDC0 /* lv-LV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "lv-LV"; path = "lv-LV.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -2782,6 +2790,22 @@
 				5C42E78B29DB76D90086AAC1 /* EmptyUserSearchView.swift */,
 			);
 			path = "Empty Views";
+			sourceTree = "<group>";
+		};
+		3A04DA222E1F40AC00449A0B /* NIP17 */ = {
+			isa = PBXGroup;
+			children = (
+				3A04DA212E1F40AC00449A0B /* NIP17DirectMessage.swift */,
+			);
+			path = NIP17;
+			sourceTree = "<group>";
+		};
+		3A04DA242E1F40AC00449A0B /* NIP59 */ = {
+			isa = PBXGroup;
+			children = (
+				3A04DA232E1F40AC00449A0B /* NIP59GiftWrap.swift */,
+			);
+			path = NIP59;
 			sourceTree = "<group>";
 		};
 		3A515C4E2DF4E0E6002D3B34 /* Tips */ = {
@@ -3794,6 +3818,8 @@
 		4CE6DEE527F7A08100C66700 /* damus */ = {
 			isa = PBXGroup;
 			children = (
+				3A04DA222E1F40AC00449A0B /* NIP17 */,
+				3A04DA242E1F40AC00449A0B /* NIP59 */,
 				D76BE18A2E0CF3BF004AD0C6 /* DIP06 */,
 				D71527FD2E0A3D5800C893D6 /* NIP51 */,
 				D7DB93082D69478400DA1EE5 /* NIP65 */,
@@ -5072,6 +5098,8 @@
 				4CA352A82A76B37E003BB08B /* NewMutesNotify.swift in Sources */,
 				4CFF8F6929CC9ED1008DB934 /* ImageContainerView.swift in Sources */,
 				7527271E2A93FF0100214108 /* Block.swift in Sources */,
+				3A04DA252E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */,
+				3A04DA262E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */,
 				4C54AA0729A540BA003E4487 /* NotificationsModel.swift in Sources */,
 				4CE4F0F229D4FCFA005914DB /* DebouncedOnChange.swift in Sources */,
 				4C32B9592A9AD44700DC3548 /* Table.swift in Sources */,
@@ -5234,6 +5262,8 @@
 				82D6FAAC2CD99F7900C925F4 /* FlatBufferBuilder.swift in Sources */,
 				82D6FAAD2CD99F7900C925F4 /* FlatbuffersErrors.swift in Sources */,
 				82D6FAAE2CD99F7900C925F4 /* Verifier.swift in Sources */,
+				3A04DA292E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */,
+				3A04DA2A2E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */,
 				82D6FAAF2CD99F7900C925F4 /* ByteBuffer.swift in Sources */,
 				82D6FAB02CD99F7900C925F4 /* TableVerifier.swift in Sources */,
 				82D6FAB12CD99F7900C925F4 /* Root.swift in Sources */,
@@ -6216,6 +6246,8 @@
 				D73E5E172C6A962A007EB227 /* ImageUploadModel.swift in Sources */,
 				D703D76A2C670B2C00A400EA /* Bech32Object.swift in Sources */,
 				D73E5E162C6A9619007EB227 /* PostView.swift in Sources */,
+				3A04DA272E1F40AC00449A0B /* NIP17DirectMessage.swift in Sources */,
+				3A04DA282E1F40AC00449A0B /* NIP59GiftWrap.swift in Sources */,
 				D703D7872C670C7E00A400EA /* DamusPurpleEnvironment.swift in Sources */,
 				D703D7892C670C8600A400EA /* DeepLPlan.swift in Sources */,
 				D73E5E182C6A963D007EB227 /* AttachMediaUtility.swift in Sources */,

@@ -40,4 +40,17 @@ final class NostrEventTests: XCTestCase {
         let urlInContent2 = "https://cdn.nostr.build/i/5c1d3296f66c2630131bf123106486aeaf051ed8466031c0e0532d70b33cddb2.jpg"
         XCTAssert(testEvent2.content.contains(urlInContent2), "Issue parsing event. Expected to see '\(urlInContent2)' inside \(testEvent2.content)")
     }
+
+    func testNostrEventWithoutPrivateKey() throws {
+        let event = NostrEvent(
+            content: "Test",
+            keypair: .just_pubkey(test_pubkey),
+            kind: NostrKind.dm.rawValue,
+            tags: []
+        )
+
+        let nonNilEvent = try XCTUnwrap(event)
+        let json = try JSONEncoder().encode(nonNilEvent)
+        print(json)
+    }
 }

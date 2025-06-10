@@ -87,7 +87,7 @@ enum LocalNotificationType: String {
         switch nostr_kind {
             case .text:
                 return .mention
-            case .dm:
+            case .deprecated_dm:
                 return .dm
             case .like:
                 return .like

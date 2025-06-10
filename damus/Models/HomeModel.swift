@@ -205,7 +205,7 @@ class HomeModel: ContactsDelegate {
             handle_boost_event(sub_id: sub_id, ev)
         case .like:
             handle_like_event(ev)
-        case .dm:
+        case .deprecated_dm:
             handle_dm(ev)
         case .delete:
             handle_delete_event(ev)
@@ -231,6 +231,13 @@ class HomeModel: ContactsDelegate {
             break
         case .interest_list:
             break   // Don't care for now
+        case .dm:
+            break // We should never receive a kind 14 DM. It will always be sealed (kind 13) and then gift wrapped (kind 1059).
+        case .seal:
+            break // We should never receive a kind 13 seal. It will always be gift wrapped (kind 1059)
+        case .gift_wrap:
+            handle_gift_wrap(ev)
+            break
         }
     }
 
@@ -563,9 +570,9 @@ class HomeModel: ContactsDelegate {
         var our_blocklist_filter = NostrFilter(kinds: [.mute_list])
         our_blocklist_filter.authors = [damus_state.pubkey]
 
-        var dms_filter = NostrFilter(kinds: [.dm])
+        var dms_filter = NostrFilter(kinds: [.deprecated_dm, .gift_wrap])
 
-        var our_dms_filter = NostrFilter(kinds: [.dm])
+        var our_dms_filter = NostrFilter(kinds: [.deprecated_dm])
 
         // friends only?...
         //dms_filter.authors = friends
@@ -813,6 +820,19 @@ class HomeModel: ContactsDelegate {
             }
             self.incoming_dms = []
         }
+    }
+
+    func handle_gift_wrap(_ ev: NostrEvent) {
+        guard ev.known_kind == .gift_wrap,
+        let privateKey = damus_state.keypair.privkey else {
+            return
+        }
+
+        guard let rumor = try? NIP59GiftWrap.unsealedRumor(giftWrapEvent: ev, using: privateKey) else {
+            return
+        }
+
+        handle_dm(rumor)
     }
 }
 
