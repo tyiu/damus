@@ -464,13 +464,13 @@ struct ProfileView: View {
                         .background(colorScheme == .dark ? Color.black : Color.white)
 
                         if filter_state == FilterState.posts {
-                            InnerTimelineView(events: profile.events, damus: damus_state, filter: content_filter(FilterState.posts))
+                            InnerTimelineView(events: profile.events, pinned_events: profile.pinned_events, damus: damus_state, filter: content_filter(FilterState.posts))
                         }
                         if filter_state == FilterState.posts_and_replies {
-                            InnerTimelineView(events: profile.events, damus: damus_state, filter: content_filter(FilterState.posts_and_replies))
+                            InnerTimelineView(events: profile.events, pinned_events: profile.pinned_events, damus: damus_state, filter: content_filter(FilterState.posts_and_replies))
                         }
                         if filter_state == FilterState.conversations && !profile.conversation_events.isEmpty {
-                            InnerTimelineView(events: profile.events, damus: damus_state, filter: content_filter(FilterState.conversations))
+                            InnerTimelineView(events: profile.events, pinned_events: EventHolder(), damus: damus_state, filter: content_filter(FilterState.conversations))
                         }
                     }
                     .padding(.horizontal, Theme.safeAreaInsets?.left)

@@ -98,7 +98,7 @@ struct FollowPackView: View {
             }
             
             if tab_selection == FollowPackTabSelection.posts {
-                InnerTimelineView(events: model.events, damus: state, filter: content_filter(event.publicKeys))
+                InnerTimelineView(events: model.events, pinned_events: EventHolder(), damus: state, filter: content_filter(event.publicKeys))
             }
         }
         .onAppear() {

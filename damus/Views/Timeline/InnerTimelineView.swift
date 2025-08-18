@@ -10,11 +10,13 @@ import SwiftUI
 
 struct InnerTimelineView: View {
     @ObservedObject var events: EventHolder
+    @ObservedObject var pinned_events: EventHolder
     let state: DamusState
     let filter: (NostrEvent) -> Bool
 
-    init(events: EventHolder, damus: DamusState, filter: @escaping (NostrEvent) -> Bool, apply_mute_rules: Bool = true) {
+    init(events: EventHolder, pinned_events: EventHolder, damus: DamusState, filter: @escaping (NostrEvent) -> Bool, apply_mute_rules: Bool = true) {
         self.events = events
+        self.pinned_events = pinned_events
         self.state = damus
         self.filter = apply_mute_rules ? { filter($0) && !damus.mutelist_manager.is_event_muted($0) } : filter
     }
@@ -29,7 +31,7 @@ struct InnerTimelineView: View {
     
     var body: some View {
         LazyVStack(spacing: 0) {
-            let events = self.events.events
+            let events = self.pinned_events.events + self.events.events
             if events.isEmpty {
                 EmptyTimelineView()
             } else {
@@ -38,7 +40,7 @@ struct InnerTimelineView: View {
                 ForEach(indexed, id: \.0.id) { tup in
                     let ev = tup.0
                     let ind = tup.1
-                    EventView(damus: state, event: ev, options: event_options)
+                    EventView(damus: state, event: ev, pinned: Set(self.pinned_events.events.map { $0.id }), options: event_options)
                         .onTapGesture {
                             let event = ev.get_inner_event(cache: state.events) ?? ev
                             let thread = ThreadModel(event: event, damus_state: state)
@@ -69,7 +71,7 @@ struct InnerTimelineView: View {
 
 struct InnerTimelineView_Previews: PreviewProvider {
     static var previews: some View {
-        InnerTimelineView(events: test_event_holder, damus: test_damus_state, filter: { _ in true })
+        InnerTimelineView(events: test_event_holder, pinned_events: EventHolder(), damus: test_damus_state, filter: { _ in true })
             .frame(width: 300, height: 500)
             .border(Color.red)
     }

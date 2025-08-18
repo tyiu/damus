@@ -21,17 +21,21 @@ struct EventView: View {
     let options: EventViewOptions
     let damus: DamusState
     let pubkey: Pubkey
+    let pinned: Set<NoteId>
 
-    init(damus: DamusState, event: NostrEvent, pubkey: Pubkey? = nil, options: EventViewOptions = []) {
+    init(damus: DamusState, event: NostrEvent, pubkey: Pubkey? = nil, pinned: Set<NoteId> = [], options: EventViewOptions = []) {
         self.event = event
         self.options = options
         self.damus = damus
         self.pubkey = pubkey ?? event.pubkey
+        self.pinned = pinned
     }
 
     var body: some View {
         VStack {
-            if event.known_kind == .boost {
+            if pinned.contains(event.id) {
+                PinnedEventView(damus: damus, event: event, options: options)
+            } else if event.known_kind == .boost {
                 if let inner_ev = event.get_inner_event(cache: damus.events) {
                     RepostedEvent(damus: damus, event: event, inner_ev: inner_ev, options: options)
                 } else {

@@ -231,6 +231,8 @@ class HomeModel: ContactsDelegate {
             break
         case .interest_list:
             break   // Don't care for now
+        case .pinned_notes:
+            break // FIXME(tyiu)
         }
     }
 

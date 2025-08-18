@@ -37,7 +37,7 @@ struct BookmarksView: View {
                 }
             } else {
                 ScrollView {
-                    InnerTimelineView(events: EventHolder(events: bookmarks, incoming: []), damus: state, filter: noneFilter)
+                    InnerTimelineView(events: EventHolder(events: bookmarks, incoming: []), pinned_events: EventHolder(), damus: state, filter: noneFilter)
                 }
                 .padding(.bottom, 10 + tabHeight + getSafeAreaBottom())
             }

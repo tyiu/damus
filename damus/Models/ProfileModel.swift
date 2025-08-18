@@ -22,8 +22,17 @@ class ProfileModel: ObservableObject, Equatable {
         }
         return nil
     }
-    
+
+    @Published var pinned_notes_list: NostrEvent? = nil
+    var pinned_note_ids: Set<NoteId> {
+        if let pinned_notes_list {
+            return Set(pinned_notes_list.referenced_noterefs.map { $0.note_id })
+        }
+        return []
+    }
+
     var events: EventHolder
+    var pinned_events: EventHolder
     let pubkey: Pubkey
     let damus: DamusState
     
@@ -32,12 +41,16 @@ class ProfileModel: ObservableObject, Equatable {
     var prof_subid = UUID().description
     var conversations_subid = UUID().description
     var findRelay_subid = UUID().description
+    var pinned_subid = UUID().description
     var conversation_events: Set<NoteId> = Set()
 
     init(pubkey: Pubkey, damus: DamusState) {
         self.pubkey = pubkey
         self.damus = damus
         self.events = EventHolder(on_queue: { ev in
+            preload_events(state: damus, events: [ev])
+        })
+        self.pinned_events = EventHolder(on_queue: { ev in
             preload_events(state: damus, events: [ev])
         })
     }
@@ -74,20 +87,18 @@ class ProfileModel: ObservableObject, Equatable {
         }
     }
 
-    func subscribe() {
-        var text_filter = NostrFilter(kinds: [.text, .longform, .highlight])
-        var profile_filter = NostrFilter(kinds: [.contacts, .metadata, .boost])
-        var relay_list_filter = NostrFilter(kinds: [.relay_list], authors: [pubkey])
+    let textKinds: [NostrKind] = [.text, .longform, .highlight]
 
-        profile_filter.authors = [pubkey]
-        
-        text_filter.authors = [pubkey]
-        text_filter.limit = 500
+    func subscribe() {
+        let text_filter = NostrFilter(kinds: textKinds, limit: 500, authors: [pubkey])
+        let profile_filter = NostrFilter(kinds: [.contacts, .metadata, .boost], authors: [pubkey])
+        let relay_list_filter = NostrFilter(kinds: [.relay_list], authors: [pubkey])
+        let pinned_notes_filter = NostrFilter(kinds: [.pinned_notes], authors: [pubkey])
 
         print("subscribing to textlike events from profile \(pubkey) with sub_id \(sub_id)")
         //print_filters(relay_id: "profile", filters: [[text_filter], [profile_filter]])
         damus.nostrNetwork.pool.subscribe(sub_id: sub_id, filters: [text_filter], handler: handle_event)
-        damus.nostrNetwork.pool.subscribe(sub_id: prof_subid, filters: [profile_filter, relay_list_filter], handler: handle_event)
+        damus.nostrNetwork.pool.subscribe(sub_id: prof_subid, filters: [profile_filter, relay_list_filter, pinned_notes_filter], handler: handle_event)
 
         subscribe_to_conversations()
     }
@@ -98,12 +109,21 @@ class ProfileModel: ObservableObject, Equatable {
             return
         }
 
-        let conversation_kinds: [NostrKind] = [.text, .longform, .highlight]
+        let conversation_kinds: [NostrKind] = textKinds
         let limit: UInt32 = 500
         let conversations_filter_them = NostrFilter(kinds: conversation_kinds, pubkeys: [damus.pubkey], limit: limit, authors: [pubkey])
         let conversations_filter_us = NostrFilter(kinds: conversation_kinds, pubkeys: [pubkey], limit: limit, authors: [damus.pubkey])
         print("subscribing to conversation events from and to profile \(pubkey) with sub_id \(conversations_subid)")
         damus.nostrNetwork.pool.subscribe(sub_id: conversations_subid, filters: [conversations_filter_them, conversations_filter_us], handler: handle_event)
+    }
+
+    private func subscribe_to_pinned_notes() {
+        guard let pinned_notes_list, pinned_notes_list.referenced_noterefs.first != nil else {
+            return
+        }
+
+        let pinned_filter = NostrFilter(ids: Array(pinned_note_ids), kinds: [.text], authors: [pubkey])
+        damus.nostrNetwork.pool.subscribe(sub_id: pinned_subid, filters: [pinned_filter], handler: handle_event)
     }
 
     func handle_profile_contact_event(_ ev: NostrEvent) {
@@ -126,11 +146,24 @@ class ProfileModel: ObservableObject, Equatable {
             if self.events.insert(ev) {
                 self.objectWillChange.send()
             }
+            if pinned_note_ids.contains(ev.id) && self.pinned_events.insert(ev) {
+                self.objectWillChange.send()
+            }
         } else if ev.known_kind == .contacts {
             handle_profile_contact_event(ev)
-        }
-        else if ev.known_kind == .relay_list {
+        } else if ev.known_kind == .relay_list {
             self.relay_list = try? NIP65.RelayList(event: ev) // Whether another user's list is malformatted is something beyond our control. Probably best to suppress errors
+        } else if ev.known_kind == .pinned_notes {
+            if let current_ev = self.pinned_notes_list {
+                guard ev.created_at > current_ev.created_at else {
+                    return
+                }
+                pinned_events.incoming.removeAll()
+                pinned_events.events.removeAll()
+            }
+
+            self.pinned_notes_list = ev
+            subscribe_to_pinned_notes()
         }
         seen_event.insert(ev.id)
     }
@@ -148,6 +181,8 @@ class ProfileModel: ObservableObject, Equatable {
             default:
                 return false
             }
+        } else if sub_id == self.pinned_subid {
+            return self.pubkey == ev.pubkey && pinned_note_ids.contains(ev.id)
         }
 
         return self.pubkey == ev.pubkey
@@ -158,7 +193,7 @@ class ProfileModel: ObservableObject, Equatable {
         case .ws_event:
             return
         case .nostr_event(let resp):
-            guard resp.subid == self.sub_id || resp.subid == self.prof_subid || resp.subid == self.conversations_subid else {
+            guard [self.sub_id, self.prof_subid, self.conversations_subid, self.pinned_subid].contains(resp.subid) else {
                 return
             }
             switch resp {
@@ -179,12 +214,24 @@ class ProfileModel: ObservableObject, Equatable {
                     if resp.subid == self.conversations_subid {
                         conversation_events.insert(ev.id)
                     }
+
+                    if resp.subid == self.pinned_subid, self.pinned_events.insert(ev) {
+                        self.objectWillChange.send()
+                    }
                 } else if resp.subid == self.conversations_subid && !conversation_events.contains(ev.id) {
                     guard relay_filtered_correctly(ev, subid: resp.subid) else {
                         break
                     }
 
                     conversation_events.insert(ev.id)
+                } else if resp.subid == self.pinned_subid {
+                    guard relay_filtered_correctly(ev, subid: resp.subid) else {
+                        break
+                    }
+
+                    if resp.subid == self.pinned_subid, self.pinned_events.insert(ev) {
+                        self.objectWillChange.send()
+                    }
                 }
             case .notice:
                 break

@@ -14,6 +14,12 @@
 		31D2E847295218AF006D67F8 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D2E846295218AF006D67F8 /* Shimmer.swift */; };
 		3A0A30BB2C21397A00F8C9BC /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0A30BA2C21397A00F8C9BC /* EmojiPicker */; };
 		3A23838E2A297DD200E5AA2E /* ZapButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A23838D2A297DD200E5AA2E /* ZapButtonModel.swift */; };
+		3A28D3A12E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A02E2F3FB5003C6F82 /* PinnedEventView.swift */; };
+		3A28D3A22E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A02E2F3FB5003C6F82 /* PinnedEventView.swift */; };
+		3A28D3A32E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A02E2F3FB5003C6F82 /* PinnedEventView.swift */; };
+		3A28D3A62E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A52E2F4082003C6F82 /* PinnedHeaderView.swift */; };
+		3A28D3A72E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A52E2F4082003C6F82 /* PinnedHeaderView.swift */; };
+		3A28D3A82E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28D3A52E2F4082003C6F82 /* PinnedHeaderView.swift */; };
 		3A2BAC5A2DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BAC592DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift */; };
 		3A2BAC5B2DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BAC592DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift */; };
 		3A2BAC5C2DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BAC592DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift */; };
@@ -1869,6 +1875,8 @@
 		3A25EF132992DA5D008ABE69 /* el-GR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "el-GR"; path = "el-GR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3A25EF142992DA5D008ABE69 /* el-GR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "el-GR"; path = "el-GR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3A25EF152992DA5D008ABE69 /* el-GR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "el-GR"; path = "el-GR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		3A28D3A02E2F3FB5003C6F82 /* PinnedEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedEventView.swift; sourceTree = "<group>"; };
+		3A28D3A52E2F4082003C6F82 /* PinnedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedHeaderView.swift; sourceTree = "<group>"; };
 		3A2B8B0A296A8982009CC16D /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-US"; path = "en-US.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		3A2BAC592DD7E4C400EBB4CC /* NIP05DomainTimelineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIP05DomainTimelineHeaderView.swift; sourceTree = "<group>"; };
 		3A2BAC5D2DE02E8600EBB4CC /* NIP05DomainPubkeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIP05DomainPubkeysView.swift; sourceTree = "<group>"; };
@@ -2784,6 +2792,15 @@
 			path = "Empty Views";
 			sourceTree = "<group>";
 		};
+		3A28D3A42E2F4053003C6F82 /* Pinned */ = {
+			isa = PBXGroup;
+			children = (
+				3A28D3A02E2F3FB5003C6F82 /* PinnedEventView.swift */,
+				3A28D3A52E2F4082003C6F82 /* PinnedHeaderView.swift */,
+			);
+			path = Pinned;
+			sourceTree = "<group>";
+		};
 		3A515C4E2DF4E0E6002D3B34 /* Tips */ = {
 			isa = PBXGroup;
 			children = (
@@ -3685,6 +3702,7 @@
 		4CC7AAEE297F11B300430951 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				3A28D3A42E2F4053003C6F82 /* Pinned */,
 				5C4FA7FA2DC29C3800CE658C /* FollowPack */,
 				5CC852A02BDED9970039FFC5 /* Highlight */,
 				4CA927682A290F8F0098A105 /* Components */,
@@ -4698,6 +4716,7 @@
 				4C75EFAD28049CFB0006080F /* PostButton.swift in Sources */,
 				D7EDED1E2B11797D0018B19C /* LongformEvent.swift in Sources */,
 				504323A92A3495B6006AE6DC /* RelayModelCache.swift in Sources */,
+				3A28D3A32E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */,
 				5C4D9EA72C042FA5005EA0F7 /* HighlightDraftContentView.swift in Sources */,
 				3A8CC6CC2A2CFEF900940F5F /* StringUtil.swift in Sources */,
 				D7FD12262BD345A700CF195B /* FirstAidSettingsView.swift in Sources */,
@@ -5002,6 +5021,7 @@
 				4CC14FF92A741939007AEB17 /* Referenced.swift in Sources */,
 				4C5C7E6A284EDE2E00A22DF5 /* SearchResultsView.swift in Sources */,
 				4CE1399429F0669900AC6A0B /* BigButton.swift in Sources */,
+				3A28D3A62E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */,
 				D7EFBA372CC322F300F45588 /* DamusVideoControlsView.swift in Sources */,
 				7C60CAEF298471A1009C80D6 /* CoreSVG.swift in Sources */,
 				D706C5AF2D5D31C20027C627 /* AutoSaveIndicatorView.swift in Sources */,
@@ -5332,6 +5352,7 @@
 				82D6FB012CD99F7900C925F4 /* Block.swift in Sources */,
 				82D6FB022CD99F7900C925F4 /* MigratedTypes.swift in Sources */,
 				82D6FB032CD99F7900C925F4 /* DamusDuration.swift in Sources */,
+				3A28D3A22E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */,
 				82D6FB042CD99F7900C925F4 /* SwipeToDismiss.swift in Sources */,
 				82D6FB052CD99F7900C925F4 /* MusicController.swift in Sources */,
 				82D6FB062CD99F7900C925F4 /* UserStatusView.swift in Sources */,
@@ -5490,6 +5511,7 @@
 				D74EA08E2D2E271E002290DD /* ErrorView.swift in Sources */,
 				82D6FB952CD99F7900C925F4 /* TranslationService.swift in Sources */,
 				82D6FB962CD99F7900C925F4 /* DeepLPlan.swift in Sources */,
+				3A28D3A72E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */,
 				82D6FB972CD99F7900C925F4 /* ZapsModel.swift in Sources */,
 				82D6FB982CD99F7900C925F4 /* DraftsModel.swift in Sources */,
 				82D6FB992CD99F7900C925F4 /* NotificationsModel.swift in Sources */,
@@ -5754,6 +5776,7 @@
 				D73E5F8B2C6AA6A2007EB227 /* UserStatusSheet.swift in Sources */,
 				D73E5E282C6A97F4007EB227 /* LoginNotify.swift in Sources */,
 				D73E5E292C6A97F4007EB227 /* LogoutNotify.swift in Sources */,
+				3A28D3A12E2F3FB5003C6F82 /* PinnedEventView.swift in Sources */,
 				D73E5E2A2C6A97F4007EB227 /* OnlyZapsNotify.swift in Sources */,
 				D73E5E2B2C6A97F4007EB227 /* PostNotify.swift in Sources */,
 				D73E5E2C2C6A97F4007EB227 /* PresentSheetNotify.swift in Sources */,
@@ -5776,6 +5799,7 @@
 				D73E5E3A2C6A97F4007EB227 /* SwipeToDismiss.swift in Sources */,
 				D73E5E3B2C6A97F4007EB227 /* MusicController.swift in Sources */,
 				D73E5E3C2C6A97F4007EB227 /* UserStatusView.swift in Sources */,
+				3A28D3A82E2F4082003C6F82 /* PinnedHeaderView.swift in Sources */,
 				D74EA08F2D2E271E002290DD /* ErrorView.swift in Sources */,
 				D73E5E3E2C6A97F4007EB227 /* SearchHeaderView.swift in Sources */,
 				D73E5E3F2C6A97F4007EB227 /* DamusGradient.swift in Sources */,
